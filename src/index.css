@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+    background-color: black;
+}
+
+::selection {
+  background: rgba(136, 255, 0, 0.6);
+  color: black;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
