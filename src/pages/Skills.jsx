@@ -91,22 +91,16 @@ function Skills() {
               <div key={index} className="w-full">
                 <div className="flex justify-between items-center text-white xl:mb-2">
                   <div className="flex items-center gap-3">
-                    <Icon className="text-green-500 text-xl" />
+                    <Icon className="text-[#a3e635] text-xl" />
                     <h3 className="text-base sm:text-lg font-medium">
                       {item.name}
                     </h3>
                   </div>
-                  <span className="text-sm sm:text-base font-semibold text-green-400">
+                  <span className="text-sm sm:text-base font-semibold greenyellow-gradient-text">
                     {item.level}%
                   </span>
                 </div>
-                {/* <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden shadow-lg">
-                  <div
-                    ref={(el) => (skillsRef.current[index] = el)}
-                    className="h-full bg-gradient-to-r from-green-600 to-green-400 rounded-full w-0 transition-all duration-1000 ease-out"
-                    style={{ "--skill-width": `${item.level}%` }}
-                  />
-                </div> */}
+               
               </div>
             );
           })}

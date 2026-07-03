@@ -11,321 +11,309 @@ import {
 
 /* ─── CSS ──────────────────────────────────────────────────────── */
 const STYLES = `
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;600;700&display=swap');
 
   :root {
-    --lime:        #ccff00;
-    --lime-dim:    rgba(204,255,0,0.10);
-    --lime-border: rgba(204,255,0,0.32);
-    --black:       #000000;
-    --surface:     #0a0a0a;
-    --surface2:    #111111;
-    --border:      rgba(255,255,255,0.07);
-    --border2:     rgba(255,255,255,0.12);
-    --muted:       rgba(255,255,255,0.32);
-    --body:        rgba(255,255,255,0.62);
+    --bg-0:        #020204;
+    --bg-1:        #050505;
+    --bg-2:        #0c0c0e;
+    --red:         #e50914;
+    --red-2:       #ff0033;
+    --red-3:       #c40022;
+    --blue:        #2563eb;
+    --purple:      #7c3aed;
+    --border:      rgba(255,255,255,0.12);
+    --border-soft: rgba(255,255,255,0.08);
+    --glass:       rgba(255,255,255,0.08);
+    --muted:       rgba(255,255,255,0.55);
+    --body:        rgba(255,255,255,0.75);
     --white:       #ffffff;
   }
 
-  @keyframes overlayIn { from{opacity:0} to{opacity:1} }
-  @keyframes slideUp   { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes scanLine  { from{top:-100%} to{top:200%} }
-  @keyframes revealBar { from{transform:scaleX(0)} to{transform:scaleX(1)} }
-  @keyframes blinkDot  { 0%,100%{opacity:1} 50%{opacity:0.25} }
+  @keyframes overlayIn   { from{opacity:0} to{opacity:1} }
+  @keyframes cardIn      { from{opacity:0; transform:scale(.96) translateY(18px)} to{opacity:1; transform:scale(1) translateY(0)} }
+  @keyframes heroIn      { from{opacity:0; transform:scale(1.04)} to{opacity:1; transform:scale(1)} }
+  @keyframes slideUp     { from{opacity:0; transform:translateY(24px)} to{opacity:1; transform:translateY(0)} }
+  @keyframes underlineIn { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+  @keyframes glowPulse   { 0%,100%{box-shadow:0 0 0 0 rgba(229,9,20,0)} 50%{box-shadow:0 0 26px 4px rgba(229,9,20,.25)} }
 
-  .m * { box-sizing:border-box; margin:0; padding:0; }
+  .m * { box-sizing:border-box; }
   .m   { font-family:'Manrope',sans-serif; }
 
   /* Overlay */
   .m-overlay {
     position:fixed; inset:0; z-index:1000;
-    background:rgba(0,0,0,0.9);
-    backdrop-filter:blur(22px) saturate(130%);
+    background:rgba(0,0,0,0.86);
+    backdrop-filter:blur(18px) saturate(120%);
     display:flex; align-items:center; justify-content:center;
-    padding:16px;
-    animation:overlayIn .2s ease forwards;
+    padding:20px;
+    animation:overlayIn .25s ease forwards;
   }
 
   /* Card */
   .m-card {
     position:relative;
-    width:100%; max-width:820px; max-height:93vh;
-    background:var(--black);
-    border:1px solid var(--border2);
+    width:100%; max-width:1180px; max-height:94vh;
+    background:var(--bg-1);
+    border:1px solid var(--border-soft);
+    border-radius:22px;
     overflow-y:auto; overflow-x:hidden;
-    scrollbar-width:thin; scrollbar-color:rgba(255,255,255,0.07) transparent;
-    animation:slideUp .4s cubic-bezier(0.16,1,0.3,1) forwards;
+    scrollbar-width:thin; scrollbar-color:rgba(255,255,255,0.15) transparent;
+    box-shadow:0 40px 100px rgba(0,0,0,0.7);
+    animation:cardIn .45s cubic-bezier(.16,1,.3,1) forwards;
   }
-  .m-card::-webkit-scrollbar{width:3px;}
-  .m-card::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);}
+  .m-card::-webkit-scrollbar{width:6px;}
+  .m-card::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12); border-radius:10px;}
 
-  /* Lime corner brackets */
-  .m-card::before,.m-card::after,
-  .m-corners::before,.m-corners::after {
-    content:''; position:absolute; pointer-events:none; z-index:10;
-    width:22px; height:22px; border-color:var(--lime); border-style:solid;
-  }
-  .m-card::before  { top:0;    left:0;  border-width:2px 0 0 2px; }
-  .m-card::after   { top:0;    right:0; border-width:2px 2px 0 0; }
-  .m-corners::before { bottom:0; left:0;  border-width:0 0 2px 2px; }
-  .m-corners::after  { bottom:0; right:0; border-width:0 2px 2px 0; }
-
-  /* Video hero */
+  /* ── Hero ────────────────────────────────────────────────── */
   .m-hero {
-    position:relative; width:100%; aspect-ratio:16/9;
-    background:#000; overflow:hidden;
+    position:relative; width:100%; height:600px;
+    background:linear-gradient(140deg,#111,var(--bg-0));
+    overflow:hidden;
   }
-  .m-hero video { width:100%; height:100%; object-fit:cover; display:block; }
-  .m-hero-fade {
-    position:absolute; inset:0; pointer-events:none;
-    background:linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.5) 78%, rgba(0,0,0,1) 100%);
-    z-index:1;
+  .m-hero video, .m-hero-img {
+    position:absolute; inset:0;
+    width:100%; height:100%; object-fit:cover; display:block;
+    animation:heroIn .7s cubic-bezier(.16,1,.3,1) both;
   }
-  /* Scan shimmer */
-  .m-hero-scan {
-    position:absolute; left:0; right:0; height:80px; z-index:2; pointer-events:none;
-    background:linear-gradient(to bottom, transparent, rgba(204,255,0,0.035), transparent);
-    animation:scanLine 4s linear infinite;
+  .m-hero-fade-bottom {
+    position:absolute; inset:0; pointer-events:none; z-index:1;
+    background:linear-gradient(to bottom, rgba(0,0,0,.25) 0%, rgba(0,0,0,.35) 40%, rgba(2,2,4,.92) 78%, var(--bg-1) 100%);
   }
-
-  /* Top bar inside hero */
-  .m-topbar {
-    position:absolute; top:0; left:0; right:0; z-index:5;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 18px;
+  .m-hero-fade-top {
+    position:absolute; top:0; left:0; right:0; height:160px; pointer-events:none; z-index:1;
+    background:linear-gradient(to bottom, rgba(0,0,0,.55), transparent);
   }
-  .m-badge {
-    display:inline-flex; align-items:center; gap:7px;
-    padding:5px 12px;
-    background:rgba(0,0,0,0.72);
-    border:1px solid var(--lime-border);
-    font-family:'DM Mono',monospace;
-    font-size:9.5px; font-weight:500;
-    letter-spacing:0.14em; text-transform:uppercase;
-    color:var(--lime);
-  }
-  .m-badge-dot {
-    width:5px; height:5px; border-radius:50%;
-    background:var(--lime);
-    animation:blinkDot 2.2s ease infinite;
-    flex-shrink:0;
+  .m-hero-fade-side {
+    position:absolute; inset:0; pointer-events:none; z-index:1;
+    background:linear-gradient(90deg, rgba(0,0,0,.5) 0%, transparent 18%, transparent 82%, rgba(0,0,0,.5) 100%);
   }
 
   /* Close button */
   .m-close {
+    position:absolute; top:20px; right:20px; z-index:6;
     display:flex; align-items:center; justify-content:center;
-    width:34px; height:34px;
-    background:rgba(0,0,0,0.72);
-    border:1px solid var(--border2);
-    color:var(--muted); cursor:pointer;
-    transition:all .18s ease;
-  }
-  .m-close:hover { color:var(--lime); background:rgba(0,0,0,0.72); border-color:var(--lime); transform:scale(1.06); }
-
-  /* No-video top bar */
-  .m-topbar-flat {
-    display:flex; align-items:center; justify-content:space-between;
-    padding:15px 20px;
-    border-bottom:1px solid var(--border);
+    width:38px; height:38px;
+    color:var(--white); cursor:pointer;
+    transition:all .3s cubic-bezier(.16,1,.3,1);
   }
 
-  /* Body */
-  .m-body { padding:10px; display:flex; flex-direction:column; gap:5px; }
+  /* Hero content (bottom, overlapping) */
+  .m-hero-content {
+    position:absolute; left:0; right:0; bottom:0; z-index:5;
+    display:flex; align-items:flex-end; gap:28px;
+    padding:0 14px 14px;
+    animation:slideUp .6s cubic-bezier(.16,1,.3,1) .15s both;
+  }
 
-  /* Animated sections */
-  .m-sec { animation:slideUp .45s cubic-bezier(0.16,1,0.3,1) both; }
-  .m-sec:nth-child(1){animation-delay:.07s}
-  .m-sec:nth-child(2){animation-delay:.13s}
-  .m-sec:nth-child(3){animation-delay:.19s}
-  .m-sec:nth-child(4){animation-delay:.25s}
+  .m-poster {
+    flex-shrink:0; width:176px; aspect-ratio:2/3;
+    border-radius:14px; overflow:hidden;
+    border:1px solid rgba(255,255,255,0.18);
+    box-shadow:0 22px 46px rgba(0,0,0,0.55);
+    background:var(--bg-2);
+  }
+  .m-poster img { width:100%; height:100%; object-fit:cover; display:block; }
 
-  /* Section label */
-  .m-label {
+  .m-hero-text { flex:1; min-width:0; padding-bottom:4px; }
+
+  .m-eyebrow {
+    font-size:12.5px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--muted); margin:0 0 10px;
+  }
+
+  .m-title {
+    font-family:'Poppins',sans-serif;
+    font-weight:800; letter-spacing:-0.01em;
+    font-size:clamp(34px, 4.6vw, 62px); line-height:1.05;
+    color:var(--white);
+    text-shadow:0 6px 30px rgba(0,0,0,0.6);
+    margin:0 0 10px;
+  }
+
+  .m-pills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .m-pill {
+    display:inline-flex; align-items:center; gap:6px;
+    padding:6px 14px; border-radius:30px;
+    font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--white);
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter:blur(14px);
+  }
+  .m-pill-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+  .m-pill--hd    { box-shadow:0 0 16px rgba(37,99,235,0.28); }
+  .m-pill--hd .m-pill-dot    { background:var(--blue); }
+  .m-pill--live  { box-shadow:0 0 16px rgba(229,9,20,0.32); }
+  .m-pill--live .m-pill-dot  { background:var(--red-2); }
+  .m-pill--source{ box-shadow:0 0 16px rgba(124,58,237,0.28); }
+  .m-pill--source .m-pill-dot{ background:var(--purple); }
+
+  /* Hero actions */
+  .m-hero-actions { display:flex; gap:14px; flex-wrap:wrap; }
+
+  .m-btn {
     display:inline-flex; align-items:center; gap:9px;
-    font-family:'DM Mono',monospace;
-    font-size:9px; font-weight:500;
-    letter-spacing:0.2em; text-transform:uppercase;
-    color:var(--muted); margin-bottom:10px;
-  }
-  .m-label::before {
-    content:''; display:block;
-    width:20px; height:1.5px; background:var(--lime); flex-shrink:0;
-  }
-
-  /* Horizontal rule with lime gradient */
-  .m-hr {
-    height:1px;
-    background:linear-gradient(90deg, var(--lime) 0px, rgba(204,255,0,0.18) 140px, transparent 360px);
-    transform-origin:left;
-    animation:revealBar .65s cubic-bezier(0.16,1,0.3,1) .05s both;
-  }
-
-  /* Description */
-  .m-desc-wrap {
-    border-left:2px solid var(--lime);
     padding:10px 10px;
+    font-size:14px; font-weight:700;
+    text-decoration:none; cursor:pointer; border:none;
+    transition:transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1), filter .2s;
+    color:var(--white);
   }
+
+  /* ── Body ────────────────────────────────────────────────── */
+  .m-content { padding:10px; display:flex; flex-direction:column; gap:14px; }
+
+  .m-sec { animation:slideUp .5s cubic-bezier(.16,1,.3,1) both; }
+
+  .m-section-title {
+    font-family:'Poppins',sans-serif;
+    font-size:24px; font-weight:800; color:var(--white);
+    margin:0 0 14px;
+    position:relative;
+  }
+  .m-section-title-bar {
+    display:block; width:144px; height:3px; margin-top:12px; border-radius:3px;
+    background:linear-gradient(90deg, greenyellow);
+    transform-origin:left;
+    animation:underlineIn .6s cubic-bezier(.16,1,.3,1) .1s both;
+  }
+
+  /* Overview */
   .m-desc {
-    font-size:13.5px; line-height:1.88;
-    color:var(--body); font-weight:400;
+    max-width:100%; margin:0 0 20px;
+    font-size:15.5px; line-height:1.8; font-weight:400;
+    color:var(--body);
   }
 
   /* Screenshots */
-  .m-shots-head {
-    display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;
-  }
-  .m-nav { display:flex; gap:6px; }
+  .m-shots-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:0; }
+  .m-nav { display:flex; gap:8px; }
   .m-nav-btn {
     display:flex; align-items:center; justify-content:center;
-    width:30px; height:30px;
-    background:transparent;
-    border:1px solid var(--border2);
-    color:var(--muted); cursor:pointer;
-    transition:all .18s;
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid var(--border);
+    backdrop-filter:blur(10px);
+    color:var(--white); cursor:pointer;
+    transition:all .25s cubic-bezier(.16,1,.3,1);
   }
   .m-nav-btn:hover {
-    border-color:var(--lime-border);
-    color:var(--lime);
-    background:var(--lime-dim);
+    border-color: greenyellow;
+    color: greenyellow;
+    transform:translateY(-2px);
   }
 
   .m-track {
-    display:flex; gap:10px;
+    display:flex; gap:18px; margin-top:22px;
     overflow-x:auto; scroll-snap-type:x mandatory;
-    scrollbar-width:none; padding-bottom:12px;
+    scrollbar-width:none; padding:6px 6px 14px;
   }
   .m-track::-webkit-scrollbar{display:none;}
 
-  /* Screenshot thumb */
   .m-thumb {
     flex-shrink:0; position:relative;
-    width:200px; height:126px; overflow:hidden;
-    scroll-snap-align:start; cursor:pointer;
-    border:1px solid var(--border);
-    transition:border-color .22s, transform .28s cubic-bezier(0.16,1,0.3,1), box-shadow .28s;
-  }
-  /* Number tag */
-  .m-thumb::before {
-    content:attr(data-n);
-    position:absolute; bottom:8px; left:10px; z-index:3;
-    font-family:'DM Mono',monospace;
-    font-size:10px; letter-spacing:0.06em;
-    color:rgba(255,255,255,0.38);
-    transition:color .2s;
+    width:320px; aspect-ratio:16/9; overflow:hidden;
+    border-radius:18px; scroll-snap-align:start; cursor:pointer;
+    border:1px solid var(--border-soft);
+    box-shadow:0 12px 30px rgba(0,0,0,0.4);
+    transition:transform .38s cubic-bezier(.16,1,.3,1), box-shadow .38s cubic-bezier(.16,1,.3,1), border-color .3s;
   }
   .m-thumb img {
     width:100%; height:100%; object-fit:cover; display:block;
-    filter:brightness(0.85) saturate(0.7);
-    transition:transform .38s cubic-bezier(0.16,1,0.3,1), filter .3s;
+    filter:brightness(0.88) saturate(0.92);
+    transition:transform .5s cubic-bezier(.16,1,.3,1), filter .35s;
   }
   .m-thumb-shade {
-    position:absolute; inset:0;
-    background:linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%);
-    z-index:2;
+    position:absolute; inset:0; z-index:2;
+    background:linear-gradient(to top, greenyellow 0%, transparent 2%);
   }
-  /* Hover scan */
-  .m-thumb-scan {
-    position:absolute; left:0; right:0; height:100%; top:-100%;
-    z-index:4; pointer-events:none;
-    background:linear-gradient(to bottom, transparent 35%, rgba(204,255,0,0.07) 50%, transparent 65%);
-    transition:none;
+  .m-thumb-num {
+    position:absolute; bottom:12px; left:14px; z-index:3;
+    font-size:11px; font-weight:700; letter-spacing:0.08em;
+    color:rgba(255,255,255,0.7);
   }
-  .m-thumb:hover .m-thumb-scan { animation:scanLine .55s linear forwards; }
   .m-thumb:hover {
-    border-color:var(--lime-border);
-    transform:translateY(-4px) scale(1.01);
-    box-shadow:0 14px 38px rgba(0,0,0,0.65), 0 0 0 1px var(--lime-border);
+    transform:translateY(-8px) scale(1.04);
+    border-color:rgba(229,9,20,0.45);;
   }
-  .m-thumb:hover img  { transform:scale(1.08); filter:brightness(1) saturate(1); }
-  .m-thumb:hover::before { color:var(--lime); }
+  .m-thumb:hover img { transform:scale(1.08); filter:brightness(1) saturate(1); }
 
   .m-expand {
-    position:absolute; top:8px; right:8px; z-index:5;
-    background:rgba(0,0,0,0.7); padding:5px;
-    border:1px solid rgba(255,255,255,0.12);
-    color:rgba(255,255,255,0.55);
-    opacity:0; transition:opacity .18s;
+    position:absolute; top:10px; right:10px; z-index:4;
+    display:flex; align-items:center; justify-content:center;
+    width:32px; height:32px; border-radius:50%;
+    background:rgba(0,0,0,0.55);
+    border:1px solid rgba(255,255,255,0.18);
+    color:var(--white);
+    opacity:0; transition:opacity .25s;
   }
   .m-thumb:hover .m-expand { opacity:1; }
 
-  /* Dots */
-  .m-dots { display:flex; gap:4px; align-items:center; }
+  .m-dots { display:flex; gap:6px; align-items:center; margin-top:6px; }
   .m-dot {
-    height:2px; border-radius:1px; border:none; padding:0; cursor:pointer;
-    background:rgba(255,255,255,0.15); width:18px;
-    transition:all .28s cubic-bezier(0.16,1,0.3,1);
+    height:4px; border-radius:2px; border:none; padding:0; cursor:pointer;
+    background:rgba(255,255,255,0.18); width:20px;
+    transition:all .3s cubic-bezier(.16,1,.3,1);
   }
-  .m-dot.on { width:34px; background:var(--lime); }
+  .m-dot.on { width:36px; background:linear-gradient(90deg, greenyellow); }
 
-  /* Tags */
-  .m-tags { display:flex; flex-wrap:wrap; gap:7px; }
-  .m-tag {
-    padding:4px 12px;
-    border:1px solid var(--border2);
-    font-family:'DM Mono',monospace;
-    font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--muted);
-    transition:all .18s;
+  /* Tech stack */
+  .m-chips { display:flex; flex-wrap:wrap; gap:10px; }
+  .m-chip {
+    padding:9px 20px; border-radius:30px;
+    font-size:13px; font-weight:600;
+    color:var(--body);
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    backdrop-filter:blur(14px);
+    transition:all .25s cubic-bezier(.16,1,.3,1);
   }
-  .m-tag:hover { border-color:var(--lime-border); color:var(--lime); background:var(--lime-dim); }
-
-  /* Action buttons */
-  .m-actions { display:flex; gap:10px; flex-wrap:wrap; }
-  .m-btn {
-    display:inline-flex; align-items:center; gap:8px;
-    padding:13px 28px;
-    font-family:'DM Mono',monospace;
-    font-size:10.5px; font-weight:500;
-    letter-spacing:0.12em; text-transform:uppercase;
-    text-decoration:none; cursor:pointer; border:none;
-    transition:all .22s cubic-bezier(0.16,1,0.3,1);
-    position:relative; overflow:hidden;
-  }
-  .m-btn-primary {
-    background:var(--lime); color:#000;
-    border:2px solid var(--lime);
-  }
-  .m-btn-primary:hover {
-    background:#000; color:var(--lime);
-    transform:translateY(-2px);
-    box-shadow:0 8px 28px rgba(204,255,0,0.22);
-  }
-  .m-btn-ghost {
-    background:transparent; color:var(--muted);
-    border:1px solid var(--border2);
-  }
-  .m-btn-ghost:hover {
-    border-color:rgba(255,255,255,0.35);
+  .m-chip:hover {
+    border-color:greenyellow;
     color:var(--white);
+    box-shadow:0 0 20px rgba(229,9,20,0.25);
     transform:translateY(-2px);
-    box-shadow:0 8px 28px rgba(255,255,255,0.05);
   }
 
   /* Lightbox */
   .m-lb {
     position:fixed; inset:0; z-index:9999;
-    background:rgba(0,0,0,0.97);
+    background:rgba(0,0,0,0.96);
     display:flex; align-items:center; justify-content:center;
-    cursor:zoom-out;
-    animation:overlayIn .15s ease forwards;
+    cursor:zoom-out; padding:24px;
+    animation:overlayIn .2s ease forwards;
   }
-  .m-lb img { max-width:90vw; max-height:90vh; object-fit:contain; }
+  .m-lb img { max-width:90vw; max-height:90vh; object-fit:contain; border-radius:10px; }
   .m-lb-close {
-    position:absolute; top:20px; right:20px;
+    position:absolute; top:24px; right:24px;
     display:flex; align-items:center; justify-content:center;
-    width:36px; height:36px;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.14);
-    color:rgba(255,255,255,0.45); cursor:pointer; transition:all .18s;
+    width:40px; height:40px; border-radius:50%;
+    border:1px solid var(--border);
+    color:var(--white); cursor:pointer; transition:all .25s;
   }
-  .m-lb-close:hover { background:rgba(255,255,255,0.05); color:var(--lime); border-color:var(--lime); }
+  .m-lb-close:hover { background:greenyellow; border-color:greenyellow; transform:rotate(90deg); }
 
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
-  @media(max-width:580px){
-    .m-body{padding:20px 16px;}
-    .m-thumb{width:155px;height:98px;}
-    .m-actions{flex-direction:column;}
-    .m-btn{width:100%;justify-content:center;}
+
+  @media(max-width:900px){
+    .m-hero{ height:520px; }
+    .m-content{ padding:14px 14px; gap:14px; }
+    .m-thumb{ width:260px; }
+  }
+
+  @media(max-width:640px){
+    .m-card{ border-radius:16px; }
+    .m-hero{ height:450px; }
+    .m-hero-content{ flex-direction:column; align-items:flex-start; padding:0 22px 26px; gap:16px; }
+    .m-poster{ width:104px; }
+    .m-title{ font-size:32px; }
+    .m-eyebrow{ font-size:11px; }
+    .m-hero-actions{ flex-direction:column; width:100%; }
+    .m-btn{ width:100%; justify-content:center; }
+    .m-content{ padding:26px 18px; gap:30px; }
+    .m-section-title{ font-size:20px; }
+    .m-thumb{ width:220px; }
+    .m-close{ top:14px; right:14px; width:34px; height:34px; }
   }
 `;
 
@@ -338,7 +326,7 @@ function Lightbox({ src, onClose }) {
   }, [onClose]);
   return (
     <div className="m-lb" onClick={onClose}>
-      <button className="m-lb-close" onClick={onClose}><FiX size={14} /></button>
+      <button className="m-lb-close" onClick={onClose} aria-label="Close"><FiX size={16} /></button>
       <img src={src} alt="Screenshot fullsize" onClick={(e) => e.stopPropagation()} />
     </div>
   );
@@ -379,66 +367,97 @@ export default function Modal({
 
   if (!show) return null;
 
+  const floatingImage = posterurl || screenshots[0] || null;
+  const heroBgImage = !videourl ? (posterurl || screenshots[0] || null) : null;
+
+  const metaParts = ["Project"];
+  if (tags.length) metaParts.push(`${tags.length} ${tags.length === 1 ? "Technology" : "Technologies"}`);
+  if (total) metaParts.push(`${total} ${total === 1 ? "Screenshot" : "Screenshots"}`);
+
+  const pills = [];
+  if (videourl) pills.push({ key: "hd", label: "Full HD" });
+  if (linkurl) pills.push({ key: "live", label: "Live" });
+  if (sourceCodeUrl) pills.push({ key: "source", label: "Open Source" });
+
   return (
     <div className="m">
       <style>{STYLES}</style>
 
       <div className="m-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-label={`${title} details`}>
-        <div className="m-card m-corners" onClick={(e) => e.stopPropagation()}>
+        <div className="m-card" onClick={(e) => e.stopPropagation()}>
 
-          {/* Hero Video */}
-          {videourl ? (
-            <div className="m-hero">
-              <div className="m-topbar">
-                <span className="m-badge"><span className="m-badge-dot" />{title}</span>
-                <button className="m-close" onClick={onClose}><FiX size={14} /></button>
-              </div>
+          {/* Hero */}
+          <div className="m-hero">
+            {videourl ? (
               <video src={videourl} poster={posterurl} controls preload="metadata" />
-              <div className="m-hero-fade" />
-              <div className="m-hero-scan" />
+            ) : heroBgImage ? (
+              <img className="m-hero-img" src={heroBgImage} alt="" aria-hidden="true" />
+            ) : null}
+
+            <div className="m-hero-fade-side" />
+            <div className="m-hero-fade-top" />
+            <div className="m-hero-fade-bottom" />
+
+            <button className="m-close" onClick={onClose} aria-label="Close">
+              <FiX size={26} />
+            </button>
+
+            <div className="m-hero-content">
+              <div className="m-hero-text">
+                
+                <h1 className="m-title">{title}</h1>
+                <div className="m-hero-actions">
+                  {linkurl && (
+                    <a href={linkurl} target="_blank" rel="noopener noreferrer" className="m-btn m-btn-live">
+                      <FiPlay size={15} />Live Preview
+                    </a>
+                  )}
+                  {sourceCodeUrl && (
+                    <a href={sourceCodeUrl} target="_blank" rel="noopener noreferrer" className="m-btn m-btn-source">
+                      <FiGithub size={15} />Source Code
+                    </a>
+                  )}
+                </div>
+              </div>
             </div>
-          ) : (
-            <div className="m-topbar-flat">
-              <span className="m-badge"><span className="m-badge-dot" />{title}</span>
-              <button className="m-close" onClick={onClose} aria-label="Close"><FiX size={14} /></button>
-            </div>
-          )}
+          </div>
 
           {/* Body */}
-          <div className="m-body">
+          <div className="m-content">
 
-            {/* 1 — Description */}
+            {/* Overview */}
             {desc && (
               <div className="m-sec">
-                <p className="m-label">Overview</p>
-                <div className="m-desc-wrap"><p className="text-white">{desc}</p></div>
+                <h2 className="m-section-title">Overview<span className="m-section-title-bar" /></h2>
+                <p className="m-desc">{desc}</p>
               </div>
             )}
 
-            {/* 2 — Screenshots */}
+            {/* Screenshots */}
             {total > 0 && (
               <div className="m-sec">
-                <div style={{ marginBottom: 20 }} />
                 <div className="m-shots-head">
-                  <p className="m-label" style={{ marginBottom: 0 }}>Screenshots</p>
+                  <h2 className="m-section-title" style={{ marginBottom: 0 }}>
+                    Screenshots<span className="m-section-title-bar" />
+                  </h2>
                   {total > 1 && (
                     <div className="m-nav">
-                      <button className="m-nav-btn" onClick={prev} aria-label="Prev"><FiChevronLeft size={13} /></button>
-                      <button className="m-nav-btn" onClick={next} aria-label="Next"><FiChevronRight size={13} /></button>
+                      <button className="m-nav-btn" onClick={prev} aria-label="Prev"><FiChevronLeft size={16} /></button>
+                      <button className="m-nav-btn" onClick={next} aria-label="Next"><FiChevronRight size={16} /></button>
                     </div>
                   )}
                 </div>
 
                 <div className="m-track" ref={trackRef}>
                   {screenshots.map((src, i) => (
-                    <div key={i} className="m-thumb" data-n={String(i + 1).padStart(2, "0")}
+                    <div key={i} className="m-thumb"
                       onClick={() => setLb(src)} role="button" tabIndex={0}
                       onKeyDown={(e) => e.key === "Enter" && setLb(src)}
                       aria-label={`Screenshot ${i + 1}`}>
                       <img src={src} alt={`Screenshot ${i + 1}`} />
                       <div className="m-thumb-shade" />
-                      <div className="m-thumb-scan" />
-                      <span className="m-expand"><FiMaximize2 size={11} /></span>
+                      <span className="m-thumb-num">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="m-expand"><FiMaximize2 size={13} /></span>
                     </div>
                   ))}
                 </div>
@@ -453,31 +472,11 @@ export default function Modal({
               </div>
             )}
 
-            {/* 3 — Tags */}
+            {/* Tech stack */}
             {tags.length > 0 && (
               <div className="m-sec">
-                <div className="m-hr" style={{ marginBottom: 18 }} />
-                <p className="m-label">Stack</p>
-                <div className="m-tags">{tags.map((t, i) => <span key={i} className="m-tag">{t}</span>)}</div>
-              </div>
-            )}
-
-            {/* 4 — Actions */}
-            {(linkurl || sourceCodeUrl) && (
-              <div className="m-sec">
-                <div style={{ marginBottom: 20 }} />
-                <div className="m-actions">
-                  {linkurl && (
-                    <a href={linkurl} target="_blank" rel="noopener noreferrer" className="m-btn m-btn-primary">
-                      <FiPlay size={11} />Live Preview
-                    </a>
-                  )}
-                  {sourceCodeUrl && (
-                    <a href={sourceCodeUrl} target="_blank" rel="noopener noreferrer" className="m-btn m-btn-ghost">
-                      <FiGithub size={13} />Source Code
-                    </a>
-                  )}
-                </div>
+                <h2 className="m-section-title">Tech Stack<span className="m-section-title-bar" /></h2>
+                <div className="m-chips">{tags.map((t, i) => <span key={i} className="m-chip">{t}</span>)}</div>
               </div>
             )}
 
