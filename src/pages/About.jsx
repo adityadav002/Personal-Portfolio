@@ -89,13 +89,14 @@ const About = () => {
             sm:text-[14px]
           "
           >
-            I am a Software Engineer with a strong foundation in web development
-            and data-driven problem solving. I build scalable, user-focused
-            applications using modern technologies like React, Node.js, and
-            databases, while also leveraging machine learning concepts where
-            needed. I focus on writing clean, maintainable code and delivering
-            solutions that are efficient, reliable, and aligned with real-world
-            use cases.
+            I am a Data Scientist passionate about transforming data into
+            meaningful insights and intelligent solutions. I enjoy working with
+            machine learning, data analysis, and modern software development to
+            solve real-world problems. With a strong foundation in programming,
+            databases, and full-stack development, I build efficient
+            applications while applying data-driven approaches wherever
+            possible. I focus on writing clean, scalable code and creating
+            solutions that combine technology, logic, and practical impact.
           </p>
 
           <hr className="mb-4" />
@@ -109,12 +110,13 @@ const About = () => {
             sm:text-[14px]
           "
           >
-            Outside of work, I enjoy exploring new technologies and building
-            side projects that challenge my creativity and technical skills. I
-            regularly practice data structures and algorithms to sharpen my
-            problem-solving abilities. I also like exploring UI/UX designs,
-            watching tech-related content, and occasionally gaming or listening
-            to music to relax and stay inspired.
+            Outside of work, I enjoy exploring hobbies that keep me creative,
+            focused, and constantly improving. Gaming allows me to experience
+            new worlds and stories, while sketching helps me express creativity
+            and improve my attention to detail. I also practice calisthenics to
+            build discipline, strength, and consistency. Whether it is fitness,
+            art, or technology, I enjoy challenging myself and learning
+            something new through every experience.
           </p>
 
           <hr className="mb-4" />
@@ -128,12 +130,13 @@ const About = () => {
             sm:text-[14px]
           "
           >
-            I am curious, disciplined, and growth-oriented. I enjoy breaking
-            down complex problems into simple, logical steps and continuously
-            improving my approach. I adapt quickly, communicate clearly, and
-            work well both independently and in collaborative environments. I
-            believe in consistency, attention to detail, and learning something
-            new from every experience.
+            I am a curious, disciplined, and detail-oriented person who enjoys
+            breaking complex problems into simple, logical solutions. I believe
+            continuous improvement, consistency, and adaptability are important
+            for long-term growth. I value clear communication, collaboration,
+            and taking ownership of my work. Every project and experience is an
+            opportunity for me to learn, improve, and create something
+            meaningful.
           </p>
 
           {/* CTA Button */}

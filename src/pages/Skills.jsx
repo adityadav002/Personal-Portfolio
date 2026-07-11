@@ -1,62 +1,39 @@
-import { useEffect, useRef } from "react";
 import {
-  FaReact,
-  FaPython,
-  FaDocker,
-  FaJs,
-  FaCss3Alt,
-  FaHtml5,
-  FaNode,
-  FaDatabase,
+  FaCode,
+  FaLayerGroup,
+  FaTools,
+  FaBrain,
 } from "react-icons/fa";
-import { SiCplusplus } from "react-icons/si";
 import InfiniteScroll from "../components/InfiniteScroll";
 
 function Skills() {
-  const skills = [
-    { name: "C++", level: 90, icon: SiCplusplus },
-    { name: "Python", level: 80, icon: FaPython },
-    { name: "JavaScript", level: 90, icon: FaJs },
-    { name: "React", level: 90, icon: FaJs },
-    { name: "Node.js", level: 90, icon: FaJs },
-    { name: "MySQL", level: 75, icon: FaDatabase },
-    { name: "Pandas", level: 75, icon: FaDatabase },
-    { name: "Numpy", level: 75, icon: FaDatabase },
-    { name: "Matplotlib & Seaborn", level: 75, icon: FaDatabase },
-    { name: "Scikit Learn", level: 70, icon: FaDatabase }
+  // Grouped skills — edit freely, everything below maps 1:1 to your old skill list
+  const skillCategories = [
+    {
+      title: "Languages",
+      icon: FaCode,
+      items: ["C++", "SQL", "JavaScript", "HTML / CSS", "Python", "Java"],
+    },
+    {
+      title: "Frameworks & Libraries",
+      icon: FaLayerGroup,
+      items: ["React.js", "Tailwind CSS", "Node.js", "Pandas", "NumPy", "Matplotlib & Seaborn", "Scikit-learn"],
+    },
+    {
+      title: "Tools",
+      icon: FaTools,
+      items: ["Git", "GitHub", "VS Code", "MySQL", "Antigravity", "Docker", "Postman"],
+    },
+    {
+      title: "CS Fundamentals",
+      icon: FaBrain,
+      items: ["Data Structures", "Algorithms", "OOP"],
+    },
   ];
-
-  const techIcons = [
-    FaReact,
-    FaNode,
-    FaHtml5,
-    FaCss3Alt,
-    FaJs,
-    FaDocker,
-    FaPython,
-  ];
-
-  const skillsRef = useRef([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fill");
-          }
-        });
-      },
-      { threshold: 0.3 },
-    );
-
-    skillsRef.current.forEach((ref) => ref && observer.observe(ref));
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <div className="py-5 px-4 sm:px-6 lg:px-8 xl:py-10 xl:px-10">
+      <br />
       {/* Header */}
       <div className="flex justify-center mb-5 mt-5 xl:mb-10 xl:mt-10">
         <div className="relative text-center">
@@ -72,6 +49,8 @@ function Skills() {
         </div>
       </div>
 
+      <br />
+
       {/* Description */}
       <p className="text-white/60 text-center max-w-5xl mx-auto mb-10 text-sm sm:text-base leading-relaxed px-4">
         As a passionate software engineer, I've built a strong foundation in web
@@ -82,33 +61,49 @@ function Skills() {
         efficient, and scalable code.
       </p>
 
-      {/* Skills Grid */}
-      <div className="max-w-6xl mx-auto mb-10 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-x-16 xl:gap-10">
-          {skills.map((item, index) => {
-            const Icon = item.icon;
+      <br />
+
+      {/* Skills Categories */}
+      <div className="max-w-6xl mx-auto mb-10 px-2 sm:px-4">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.02] px-4 py-2 sm:px-8 sm:py-2">
+          {skillCategories.map((category, index) => {
+            const CategoryIcon = category.icon;
             return (
-              <div key={index} className="w-full">
-                <div className="flex justify-between items-center text-white xl:mb-2">
-                  <div className="flex items-center gap-3">
-                    <Icon className="text-[#a3e635] text-xl" />
-                    <h3 className="text-base sm:text-lg font-medium">
-                      {item.name}
-                    </h3>
-                  </div>
-                  <span className="text-sm sm:text-base font-semibold greenyellow-gradient-text">
-                    {item.level}%
+              <div
+                key={category.title}
+                className={`flex flex-col md:flex-row md:items-center gap-3 md:gap-8 py-5 sm:py-6 ${
+                  index !== skillCategories.length - 1
+                    ? "border-b border-dashed border-white/10"
+                    : ""
+                }`}
+              >
+                {/* Category label */}
+                <div className="flex items-center gap-3 md:w-56 lg:w-64 shrink-0">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-lg border border-white/15 text-[#a3e635] text-sm shrink-0">
+                    <CategoryIcon />
+                  </span>
+                  <span className="uppercase tracking-wider text-xs sm:text-sm font-semibold text-white/80 whitespace-nowrap">
+                    {category.title}
                   </span>
                 </div>
-               
+
+                {/* Skill pills */}
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {category.items.map((skill) => (
+                    <div
+                      key={skill}
+                      className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm text-white/90 hover:border-[#a3e635]/40 hover:bg-white/[0.06] transition-colors duration-200"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-[2px] bg-[#a3e635] shrink-0" />
+                      <span className="whitespace-nowrap">{skill}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             );
           })}
         </div>
       </div>
-
-      {/* Infinite Scroll Tech Icons */}
-      <InfiniteScroll />
     </div>
   );
 }

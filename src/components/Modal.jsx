@@ -3,29 +3,25 @@ import {
   FiX,
   FiChevronLeft,
   FiChevronRight,
-  FiExternalLink,
   FiGithub,
   FiMaximize2,
   FiPlay,
 } from "react-icons/fi";
+import { parseProjectDesc } from "../utils/parseProjectDesc.js";
 
 /* ─── CSS ──────────────────────────────────────────────────────── */
 const STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;600;700&display=swap');
 
   :root {
-    --bg-0:        #020204;
-    --bg-1:        #050505;
-    --bg-2:        #0c0c0e;
-    --red:         #e50914;
-    --red-2:       #ff0033;
-    --red-3:       #c40022;
-    --blue:        #2563eb;
-    --purple:      #7c3aed;
-    --border:      rgba(255,255,255,0.12);
-    --border-soft: rgba(255,255,255,0.08);
-    --glass:       rgba(255,255,255,0.08);
-    --muted:       rgba(255,255,255,0.55);
+    --bg-0:        #050505;
+    --bg-1:        #111111;
+    --bg-2:        #161616;
+    --accent:      #adff2f;
+    --border:      rgba(255,255,255,0.08);
+    --border-soft: rgba(255,255,255,0.06);
+    --glass:       rgba(255,255,255,0.06);
+    --muted:       #9CA3AF;
     --body:        rgba(255,255,255,0.75);
     --white:       #ffffff;
   }
@@ -35,7 +31,6 @@ const STYLES = `
   @keyframes heroIn      { from{opacity:0; transform:scale(1.04)} to{opacity:1; transform:scale(1)} }
   @keyframes slideUp     { from{opacity:0; transform:translateY(24px)} to{opacity:1; transform:translateY(0)} }
   @keyframes underlineIn { from{transform:scaleX(0)} to{transform:scaleX(1)} }
-  @keyframes glowPulse   { 0%,100%{box-shadow:0 0 0 0 rgba(229,9,20,0)} 50%{box-shadow:0 0 26px 4px rgba(229,9,20,.25)} }
 
   .m * { box-sizing:border-box; }
   .m   { font-family:'Manrope',sans-serif; }
@@ -78,7 +73,7 @@ const STYLES = `
   }
   .m-hero-fade-bottom {
     position:absolute; inset:0; pointer-events:none; z-index:1;
-    background:linear-gradient(to bottom, rgba(0,0,0,.25) 0%, rgba(0,0,0,.35) 40%, rgba(2,2,4,.92) 78%, var(--bg-1) 100%);
+    background:linear-gradient(to bottom, rgba(0,0,0,.25) 0%, rgba(0,0,0,.35) 40%, rgba(5,5,5,.92) 78%, var(--bg-1) 100%);
   }
   .m-hero-fade-top {
     position:absolute; top:0; left:0; right:0; height:160px; pointer-events:none; z-index:1;
@@ -93,9 +88,17 @@ const STYLES = `
   .m-close {
     position:absolute; top:20px; right:20px; z-index:6;
     display:flex; align-items:center; justify-content:center;
-    width:38px; height:38px;
+    width:38px; height:38px; border-radius:50%;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.14);
     color:var(--white); cursor:pointer;
     transition:all .3s cubic-bezier(.16,1,.3,1);
+  }
+  .m-close:hover {
+    background:rgba(173,255,47,0.12);
+    border-color:var(--accent);
+    color:var(--accent);
+    transform:rotate(90deg);
   }
 
   /* Hero content (bottom, overlapping) */
@@ -118,8 +121,8 @@ const STYLES = `
   .m-hero-text { flex:1; min-width:0; padding-bottom:4px; }
 
   .m-eyebrow {
-    font-size:12.5px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase;
-    color:var(--muted); margin:0 0 10px;
+    font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--muted); margin:0 0 12px;
   }
 
   .m-title {
@@ -128,63 +131,87 @@ const STYLES = `
     font-size:clamp(34px, 4.6vw, 62px); line-height:1.05;
     color:var(--white);
     text-shadow:0 6px 30px rgba(0,0,0,0.6);
-    margin:0 0 10px;
+    margin:0 0 16px;
   }
 
-  .m-pills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .m-pills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
   .m-pill {
     display:inline-flex; align-items:center; gap:6px;
     padding:6px 14px; border-radius:30px;
     font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
     color:var(--white);
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.18);
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.16);
     backdrop-filter:blur(14px);
+    box-shadow:0 0 14px rgba(173,255,47,0.14);
   }
-  .m-pill-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
-  .m-pill--hd    { box-shadow:0 0 16px rgba(37,99,235,0.28); }
-  .m-pill--hd .m-pill-dot    { background:var(--blue); }
-  .m-pill--live  { box-shadow:0 0 16px rgba(229,9,20,0.32); }
-  .m-pill--live .m-pill-dot  { background:var(--red-2); }
-  .m-pill--source{ box-shadow:0 0 16px rgba(124,58,237,0.28); }
-  .m-pill--source .m-pill-dot{ background:var(--purple); }
+  .m-pill-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; background:var(--accent); }
 
   /* Hero actions */
-  .m-hero-actions { display:flex; gap:14px; flex-wrap:wrap; }
+  .m-hero-actions { display:flex; gap:14px; flex-wrap:wrap; margin-top:4px; }
 
   .m-btn {
     display:inline-flex; align-items:center; gap:9px;
-    padding:10px 10px;
+    padding:12px 22px; border-radius:10px;
     font-size:14px; font-weight:700;
-    text-decoration:none; cursor:pointer; border:none;
-    transition:transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1), filter .2s;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+    transition:transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1), filter .2s, background .2s, color .2s;
     color:var(--white);
   }
+  .m-btn-live {
+    background:var(--accent);
+    color:#050505;
+    box-shadow:0 0 26px rgba(173,255,47,0.28);
+  }
+  .m-btn-live:hover { transform:translateY(-2px); box-shadow:0 0 34px rgba(173,255,47,0.45); }
+  .m-btn-source {
+    background:rgba(255,255,255,0.04);
+    border-color:rgba(255,255,255,0.22);
+    color:var(--white);
+  }
+  .m-btn-source:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
 
   /* ── Body ────────────────────────────────────────────────── */
-  .m-content { padding:10px; display:flex; flex-direction:column; gap:14px; }
+  .m-content { padding:36px 40px 44px; display:flex; flex-direction:column; gap:38px; }
 
   .m-sec { animation:slideUp .5s cubic-bezier(.16,1,.3,1) both; }
 
   .m-section-title {
     font-family:'Poppins',sans-serif;
-    font-size:24px; font-weight:800; color:var(--white);
+    font-size:22px; font-weight:800; color:var(--white);
     margin:0 0 14px;
     position:relative;
   }
   .m-section-title-bar {
-    display:block; width:144px; height:3px; margin-top:12px; border-radius:3px;
-    background:linear-gradient(90deg, greenyellow);
+    display:block; width:120px; height:3px; margin-top:12px; border-radius:3px;
+    background:var(--accent);
     transform-origin:left;
     animation:underlineIn .6s cubic-bezier(.16,1,.3,1) .1s both;
   }
 
   /* Overview */
   .m-desc {
-    max-width:100%; margin:0 0 20px;
+    max-width:100%; margin:0;
     font-size:15.5px; line-height:1.8; font-weight:400;
     color:var(--body);
+    white-space:pre-line;
   }
+
+  /* Key Features */
+  .m-feat-grid {
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:12px 28px;
+    list-style:none; margin:0; padding:0;
+  }
+  .m-feat-item {
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:14.5px; line-height:1.6; color:var(--body);
+  }
+  .m-feat-dot {
+    width:6px; height:6px; border-radius:2px; background:var(--accent);
+    margin-top:7px; flex-shrink:0;
+    box-shadow:0 0 8px rgba(173,255,47,0.5);
+  }
+  @media(max-width:640px){ .m-feat-grid{ grid-template-columns:1fr; } }
 
   /* Screenshots */
   .m-shots-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:0; }
@@ -198,8 +225,8 @@ const STYLES = `
     transition:all .25s cubic-bezier(.16,1,.3,1);
   }
   .m-nav-btn:hover {
-    border-color: greenyellow;
-    color: greenyellow;
+    border-color: var(--accent);
+    color: var(--accent);
     transform:translateY(-2px);
   }
 
@@ -225,16 +252,16 @@ const STYLES = `
   }
   .m-thumb-shade {
     position:absolute; inset:0; z-index:2;
-    background:linear-gradient(to top, greenyellow 0%, transparent 2%);
+    background:linear-gradient(to top, rgba(0,0,0,.6) 0%, transparent 42%);
   }
   .m-thumb-num {
     position:absolute; bottom:12px; left:14px; z-index:3;
     font-size:11px; font-weight:700; letter-spacing:0.08em;
-    color:rgba(255,255,255,0.7);
+    color:rgba(255,255,255,0.75);
   }
   .m-thumb:hover {
     transform:translateY(-8px) scale(1.04);
-    border-color:rgba(229,9,20,0.45);;
+    border-color:rgba(173,255,47,0.4);
   }
   .m-thumb:hover img { transform:scale(1.08); filter:brightness(1) saturate(1); }
 
@@ -255,7 +282,7 @@ const STYLES = `
     background:rgba(255,255,255,0.18); width:20px;
     transition:all .3s cubic-bezier(.16,1,.3,1);
   }
-  .m-dot.on { width:36px; background:linear-gradient(90deg, greenyellow); }
+  .m-dot.on { width:36px; background:var(--accent); }
 
   /* Tech stack */
   .m-chips { display:flex; flex-wrap:wrap; gap:10px; }
@@ -263,15 +290,15 @@ const STYLES = `
     padding:9px 20px; border-radius:30px;
     font-size:13px; font-weight:600;
     color:var(--body);
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.12);
     backdrop-filter:blur(14px);
     transition:all .25s cubic-bezier(.16,1,.3,1);
   }
   .m-chip:hover {
-    border-color:greenyellow;
+    border-color:var(--accent);
     color:var(--white);
-    box-shadow:0 0 20px rgba(229,9,20,0.25);
+    box-shadow:0 0 18px rgba(173,255,47,0.2);
     transform:translateY(-2px);
   }
 
@@ -291,13 +318,13 @@ const STYLES = `
     border:1px solid var(--border);
     color:var(--white); cursor:pointer; transition:all .25s;
   }
-  .m-lb-close:hover { background:greenyellow; border-color:greenyellow; transform:rotate(90deg); }
+  .m-lb-close:hover { background:var(--accent); border-color:var(--accent); color:#050505; transform:rotate(90deg); }
 
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
 
   @media(max-width:900px){
     .m-hero{ height:520px; }
-    .m-content{ padding:14px 14px; gap:14px; }
+    .m-content{ padding:28px 20px 36px; gap:30px; }
     .m-thumb{ width:260px; }
   }
 
@@ -310,7 +337,7 @@ const STYLES = `
     .m-eyebrow{ font-size:11px; }
     .m-hero-actions{ flex-direction:column; width:100%; }
     .m-btn{ width:100%; justify-content:center; }
-    .m-content{ padding:26px 18px; gap:30px; }
+    .m-content{ padding:24px 18px 32px; gap:30px; }
     .m-section-title{ font-size:20px; }
     .m-thumb{ width:220px; }
     .m-close{ top:14px; right:14px; width:34px; height:34px; }
@@ -370,8 +397,15 @@ export default function Modal({
   const floatingImage = posterurl || screenshots[0] || null;
   const heroBgImage = !videourl ? (posterurl || screenshots[0] || null) : null;
 
-  const metaParts = ["Project"];
-  if (tags.length) metaParts.push(`${tags.length} ${tags.length === 1 ? "Technology" : "Technologies"}`);
+  // Parse the existing `desc` field into overview / features / tech stack —
+  // projectsData.js itself never needs to change.
+  const parsed = parseProjectDesc(desc);
+  const overviewText = parsed.overview || desc || "";
+  const features = parsed.features;
+  const techChips = tags.length ? tags : parsed.techStack;
+
+  const metaParts = ["Case Study"];
+  if (techChips.length) metaParts.push(`${techChips.length} ${techChips.length === 1 ? "Technology" : "Technologies"}`);
   if (total) metaParts.push(`${total} ${total === 1 ? "Screenshot" : "Screenshots"}`);
 
   const pills = [];
@@ -399,12 +433,24 @@ export default function Modal({
             <div className="m-hero-fade-bottom" />
 
             <button className="m-close" onClick={onClose} aria-label="Close">
-              <FiX size={26} />
+              <FiX size={20} />
             </button>
 
             <div className="m-hero-content">
               <div className="m-hero-text">
-                
+                <p className="m-eyebrow">{metaParts.join("  ·  ")}</p>
+
+                {pills.length > 0 && (
+                  <div className="m-pills">
+                    {pills.map((p) => (
+                      <span key={p.key} className="m-pill">
+                        <span className="m-pill-dot" />
+                        {p.label}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
                 <h1 className="m-title">{title}</h1>
                 <div className="m-hero-actions">
                   {linkurl && (
@@ -426,10 +472,25 @@ export default function Modal({
           <div className="m-content">
 
             {/* Overview */}
-            {desc && (
+            {overviewText && (
               <div className="m-sec">
                 <h2 className="m-section-title">Overview<span className="m-section-title-bar" /></h2>
-                <p className="m-desc">{desc}</p>
+                <p className="m-desc">{overviewText}</p>
+              </div>
+            )}
+
+            {/* Key Features */}
+            {features.length > 0 && (
+              <div className="m-sec">
+                <h2 className="m-section-title">Key Features<span className="m-section-title-bar" /></h2>
+                <ul className="m-feat-grid">
+                  {features.map((f, i) => (
+                    <li key={i} className="m-feat-item">
+                      <span className="m-feat-dot" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
 
@@ -473,10 +534,10 @@ export default function Modal({
             )}
 
             {/* Tech stack */}
-            {tags.length > 0 && (
+            {techChips.length > 0 && (
               <div className="m-sec">
                 <h2 className="m-section-title">Tech Stack<span className="m-section-title-bar" /></h2>
-                <div className="m-chips">{tags.map((t, i) => <span key={i} className="m-chip">{t}</span>)}</div>
+                <div className="m-chips">{techChips.map((t, i) => <span key={i} className="m-chip">{t}</span>)}</div>
               </div>
             )}
 

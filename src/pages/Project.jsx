@@ -1,77 +1,177 @@
+import { useState, useEffect, useRef } from "react";
+import {
+  FiExternalLink,
+  FiArrowRight,
+  FiFilm,
+  FiTrello,
+  FiBarChart2,
+  FiTruck,
+  FiCode,
+} from "react-icons/fi";
 import projects from "../data/projectsData.js";
 import Modal from "../components/Modal.jsx";
-import { useState } from "react";
+import { parseProjectDesc } from "../utils/parseProjectDesc.js";
+import "./Project.css";
+
+const MAX_FEATURES_ON_CARD = 5;
+const MAX_CHIPS_ON_CARD = 4;
+
+function getProjectIcon(project) {
+  if (project.icon) return project.icon;
+  const haystack =
+    `${project.name} ${(project.tags || []).join(" ")}`.toLowerCase();
+  if (/movie|film|cinema/.test(haystack)) return FiFilm;
+  if (/kanban|board|task/.test(haystack)) return FiTrello;
+  if (/csv|pandas|numpy|data|analy|chart|matplotlib|seaborn/.test(haystack))
+    return FiBarChart2;
+  if (/porsche|car|vehicle/.test(haystack)) return FiTruck;
+  return FiCode;
+}
+
+function ProjectCard({ project, index, side, onOpen }) {
+  const Icon = getProjectIcon(project);
+  const { overview, features, techStack } = parseProjectDesc(project.desc);
+  const chips = project.tags?.length ? project.tags : techStack;
+  const featureList = features.slice(0, MAX_FEATURES_ON_CARD);
+  const chipList = chips.slice(0, MAX_CHIPS_ON_CARD);
+  const extraChips = chips.length - chipList.length;
+
+  const cardRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const cardStyle = project.hoverimg
+    ? { "--pt-hover-img": `url(${project.hoverimg})` }
+    : undefined;
+
+  return (
+    <div
+      ref={cardRef}
+      className={`pt-card pt-card--${side} ${visible ? "pt-card--visible" : ""}`}
+      style={cardStyle}
+      onClick={() => onOpen(project)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && onOpen(project)}
+    >
+      <div className="pt-card-top">
+        <span className="pt-eyebrow">
+          Project {String(index + 1).padStart(2, "0")}
+        </span>
+        {project.linkUrl && (
+          <a
+            href={project.linkUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pt-ext-link"
+            onClick={(e) => e.stopPropagation()}
+            aria-label={`Open ${project.name} live demo`}
+          >
+            <FiExternalLink size={14} />
+          </a>
+        )}
+      </div>
+
+      <div className="pt-card-onerow">
+        <div className="pt-icon-box">
+          <Icon size={19} />
+        </div>
+
+        <h3 className="pt-card-title">{project.name}</h3>
+      </div>
+
+      {chipList.length > 0 && (
+        <div className="pt-chips">
+          {chipList.map((tag, i) => (
+            <span key={i} className="pt-chip">
+              <span className="pt-chip-dot" />
+              {tag}
+            </span>
+          ))}
+          {extraChips > 0 && (
+            <span className="pt-chip pt-chip--muted">+{extraChips}</span>
+          )}
+        </div>
+      )}
+
+      {overview && <p className="pt-card-desc">{overview}</p>}
+
+      {featureList.length > 0 && (
+        <>
+          <span className="pt-features-heading">Key Features</span>
+          <ul className="pt-feature-list">
+            {featureList.map((f, i) => (
+              <li key={i}>
+                <span className="pt-dot" />
+                {f}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      <span className="pt-view-details">
+        View Details <FiArrowRight size={14} className="pt-arrow" />
+      </span>
+    </div>
+  );
+}
 
 function Project() {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [hoverImg, setHoverImg] = useState(null);
-  const [imgPos, setImgPos] = useState({ x: 0, y: 0 });
 
   const handleOpen = (project) => setSelectedProject(project);
   const handleClose = () => setSelectedProject(null);
 
-  const handleMouseMove = (e) => {
-    setImgPos({ x: e.clientX + 20, y: e.clientY + 20 });
-  };
-
   return (
     <div
-      className="relative overflow-hidden md:py-5 py-5 px-4"
-      onMouseMove={handleMouseMove}
+      className="pt-root relative overflow-hidden py-14 px-4 sm:px-6"
+      id="projects"
     >
-      {/* Projects List */}
-      <div className="relative z-10">
-        <h1
-          className="text-[35px] sm:text-[35px] md:text-[40px] 
-               font-bold tracking-wide 
-               sm:mb-8 md:mb-10 sm:mt-8 md:mt-6
-               mb-5 bg-lime-600 text-black w-fit mx-auto"
-        >
-          PROJECTS
+      {/* Header */}
+      <div className="pt-header">
+        <span className="pt-header-eyebrow">My Work</span>
+        <h1 className="pt-header-title">
+          PRO<span className="pt-accent">JECTS</span>
         </h1>
-        {projects.map((project, index) => (
-          <div
-            key={index}
-            className="relative w-full xl:h-[80px] group mb-3 sm:mt-6 sm:mb-3 md:mt-8 md:mb-4 cursor-pointer sm:py-2 overflow-hidden py-2 h-[60px] xl:py-0 xl:text-[10px]"
-            onMouseEnter={() => setHoverImg(project.hoverimg)}
-            onMouseLeave={() => setHoverImg(null)}
-          >
-            <h1 className="absolute w-full">
-              <button
-                className="
-        absolute left-5 sm:left-10 md:left-[70px]
-        text-white text-[22px] sm:text-[26px] md:text-[32px]
-        font-medium tracking-wide
-        transition-all duration-500 ease-in-out
-        group-hover:left-1/2
-        group-hover:-translate-x-1/2
-        sm:py-2
-      "
-                onClick={() => handleOpen(project)}
-              >
-                {project.name}
-              </button>
-            </h1>
+        <p className="pt-header-sub">
+          A timeline of selected projects that showcase my skills, creativity
+          and problem-solving approach.
+        </p>
+      </div>
 
-            <hr className="border-white/20 absolute bottom-0 w-full" />
+      {/* Timeline */}
+      <div className="pt-timeline">
+        <div className="pt-line" aria-hidden="true" />
+        {projects.map((project, index) => (
+          <div className="pt-row" key={`${project.name}-${index}`}>
+            <div className="pt-node" aria-hidden="true" />
+            <ProjectCard
+              project={project}
+              index={index}
+              side={index % 2 === 0 ? "left" : "right"}
+              onOpen={handleOpen}
+            />
           </div>
         ))}
       </div>
 
-      {/* Floating Cursor Image */}
-      {hoverImg && (
-        <img
-          src={hoverImg}
-          alt="Project preview"
-          className="fixed w-[120px] md:w-[180px] md:h-[180px] object-cover rounded-full xl:text-xl pointer-events-none z-[999] opacity-0 animate-fadeIn mix-blend-difference hidden sm:block -translate-x-1/2 -translate-y-1/2"
-          style={{
-            top: imgPos.y,
-            left: imgPos.x,
-          }}
-        />
-      )}
-
-      {/* Modal */}
+      {/* Modal — unchanged logic */}
       {selectedProject && (
         <Modal
           show={true}
@@ -87,30 +187,17 @@ function Project() {
         />
       )}
 
-      {/* More Projects Link */}
-      <div className="flex justify-center w-full underline xl:mb-4">
+      {/* More projects */}
+      <div className="pt-more">
         <a
+          href="https://github.com/adityadav002"
           target="_blank"
           rel="noopener noreferrer"
-          href="https://github.com/adityadav002"
-          className="mt-4 text-[#adff2f] text-[22px] sm:text-[26px] md:text-[30px] font-light tracking-wider transition-colors duration-300 hover:text-[#c8ff5e]"
+          className="pt-more-btn"
         >
-          more
+          View All Projects
         </a>
       </div>
-
-      {/* Keyframe Animation Styles */}
-      <style>{`
-        @keyframes fadeIn {
-          to {
-            opacity: 1;
-          }
-        }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.6s ease forwards;
-        }
-      `}</style>
     </div>
   );
 }
