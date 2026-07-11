@@ -132,6 +132,36 @@ function ProjectCard({ project, index, side, onOpen }) {
   );
 }
 
+/**
+ * One row of the timeline. The rail (line-segment / node / line-segment)
+ * is a single flex column that always fills the row's full height, so
+ * the node sits exactly at the row's vertical midpoint and the segment
+ * above/below it are always equal — no matter how tall the card is.
+ * Consecutive rows have zero margin between them, so row N's bottom
+ * segment and row N+1's top segment touch exactly: the line can never
+ * visually break.
+ */
+function TimelineRow({ project, index, onOpen }) {
+  const side = index % 2 === 0 ? "left" : "right";
+  // DOM order is always [card, rail, spacer] — CSS `order` (keyed off
+  // pt-row--left / pt-row--right) is what actually decides left/right
+  // placement on desktop, and forces [rail, card] on mobile. Keeping a
+  // single fixed DOM order avoids conditional branching here entirely.
+  return (
+    <div className={`pt-row pt-row--${side}`}>
+      <div className="pt-card-slot">
+        <ProjectCard project={project} index={index} side={side} onOpen={onOpen} />
+      </div>
+      <div className="pt-rail" aria-hidden="true">
+        <span className="pt-rail-seg" />
+        <span className="pt-node" />
+        <span className="pt-rail-seg" />
+      </div>
+      <div className="pt-spacer" aria-hidden="true" />
+    </div>
+  );
+}
+
 function Project() {
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -157,17 +187,13 @@ function Project() {
 
       {/* Timeline */}
       <div className="pt-timeline">
-        <div className="pt-line" aria-hidden="true" />
         {projects.map((project, index) => (
-          <div className="pt-row" key={`${project.name}-${index}`}>
-            <div className="pt-node" aria-hidden="true" />
-            <ProjectCard
-              project={project}
-              index={index}
-              side={index % 2 === 0 ? "left" : "right"}
-              onOpen={handleOpen}
-            />
-          </div>
+          <TimelineRow
+            key={`${project.name}-${index}`}
+            project={project}
+            index={index}
+            onOpen={handleOpen}
+          />
         ))}
       </div>
 
@@ -188,7 +214,7 @@ function Project() {
       )}
 
       {/* More projects */}
-      <div className="pt-more">
+      <div className="pt-more"> 
         <a
           href="https://github.com/adityadav002"
           target="_blank"

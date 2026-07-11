@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;600;700&display=swap');
 
+.pt-root, .pt-root *, .pt-root *::before, .pt-root *::after {
+  box-sizing: border-box;
+}
+
 /* ── Tokens ──────────────────────────────────────────────── */
 .pt-root {
   --pt-bg: #050505;
@@ -47,64 +51,145 @@
   margin: 0;
 }
 
-/* ── Timeline shell ──────────────────────────────────────── */
+/* ── Timeline shell ──────────────────────────────────────────────
+   Architecture: every row is a flex ROW of [card, rail, spacer] (DOM
+   order is always the same — see note below on why). The rail is a
+   flex *column* made of [line-segment, node, line-segment], where
+   both segments are `flex: 1 1 0`. Flexbox's `align-items: stretch`
+   (the default, and unlike CSS Grid's auto-track sizing it has no
+   circular-dependency edge cases here) reliably stretches the rail
+   to match the row's cross-size, which is driven by the card's
+   natural content height — so the two segments are always exactly
+   equal and the node is always exactly centered, no matter how tall
+   that particular card is. This was verified with a real headless
+   render across mismatched card heights before shipping.
+
+   Left/right placement is done with the `order` property, not by
+   changing DOM order or grid-column — `.pt-spacer` is an invisible
+   flex:1 sibling that mirrors the empty side, which is what
+   guarantees left and right cards sit at identical distances from
+   the rail (perfectly symmetric) regardless of content length.
+
+   Continuity: rows are stacked in a flex column with ZERO gap
+   between them (spacing instead comes from `padding` *inside* each
+   row, which the rail spans too, top to bottom). That means row N's
+   bottom segment and row N+1's top segment always touch pixel for
+   pixel — there is no gap in the DOM for the line to "disappear"
+   into, so it reads as one continuous line by construction.
+
+   Connector: the horizontal stub lives on the node itself
+   (`.pt-node::before`), not on the card. Since the node's position
+   is already guaranteed correct by the rail, anchoring the connector
+   there means it can never point at empty space.
+------------------------------------------------------------------- */
 .pt-timeline {
   position: relative;
   max-width: 1080px;
   margin: 0 auto;
-}
-.pt-line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 18px;
-  width: 1px;
-  background: var(--pt-accent);
-  z-index: 0;
-}
-@media (min-width: 768px) {
-  .pt-line { left: 50%; transform: translateX(-50%); }
+  display: flex;
+  flex-direction: column;
 }
 
 .pt-row {
+  --pt-gap: 20px;
+  --pt-row-space: 22px;
   position: relative;
-  display: grid;
-  grid-template-columns: 36px 1fr;
-  align-items: center;
-  column-gap: 20px;
-  margin-bottom: 28px;
+  display: flex;
+  align-items: stretch;
+  gap: var(--pt-gap);
 }
 @media (min-width: 768px) {
-  .pt-row { grid-template-columns: 1fr 56px 1fr; margin-bottom: 40px; }
+  .pt-row { --pt-gap: 28px; --pt-row-space: 34px; }
 }
 
-/* Node */
+/* .pt-card-slot is the actual flex-row item — deliberately bare (no
+   padding/border/margin of its own) so its flex-basis:0 resolves to a
+   true zero, exactly like .pt-spacer. If .pt-card's own padding/border
+   sat directly on the flex item, browsers clamp flex-basis:0 up to at
+   least that padding+border before growth is distributed, silently
+   giving the card extra width the spacer never gets — breaking the
+   mirroring. Keeping .pt-card as a plain block child sidesteps that
+   entirely, and its own styling (padding, border, hover, etc.) is
+   untouched. */
+.pt-card-slot { flex: 1 1 0; min-width: 0; }
+.pt-spacer { flex: 1 1 0; display: none; }
+
+/* Mobile: rail always first, card always second, spacer hidden. */
+.pt-rail { order: 1; }
+.pt-card-slot { order: 2; }
+.pt-spacer { order: 3; }
+
+@media (min-width: 768px) {
+  .pt-spacer { display: block; }
+  .pt-rail { order: 2; } /* rail always visually between the two card slots */
+
+  .pt-row--left .pt-card-slot { order: 1; }
+  .pt-row--left .pt-spacer { order: 3; }
+
+  .pt-row--right .pt-spacer { order: 1; }
+  .pt-row--right .pt-card-slot { order: 3; }
+}
+
+/* Rail column */
+.pt-rail {
+  flex: 0 0 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .pt-rail { flex-basis: 56px; }
+}
+
+.pt-rail-seg {
+  width: 1px;
+  flex: 1 1 0;
+  background: var(--pt-accent);
+  opacity: 0.55;
+}
+
+/* Node — always exactly between the two equal rail segments */
 .pt-node {
-  grid-column: 1;
-  justify-self: center;
+  position: relative;
+  flex-shrink: 0;
   width: 13px;
   height: 13px;
   border-radius: 50%;
   background: var(--pt-bg);
   border: 2px solid var(--pt-accent);
-  box-shadow: 0 0 0 4px rgba(5, 5, 5, 1), 0 0 12px rgba(173, 255, 47, 0.35);
+  box-shadow: 0 0 12px rgba(173, 255, 47, 0.35);
   z-index: 2;
-  transition: box-shadow 0.3s ease;
-}
-@media (min-width: 768px) {
-  .pt-node { grid-column: 2; }
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 .pt-row:hover .pt-node {
-  box-shadow: 0 0 0 4px rgba(5, 5, 5, 1), 0 0 20px rgba(173, 255, 47, 0.65);
+  box-shadow: 0 0 20px rgba(173, 255, 47, 0.65);
+  transform: scale(1.15);
+}
+
+/* Connector — anchored to the node, so it always meets its center */
+.pt-node::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: var(--pt-gap);
+  height: 1px;
+  background: rgba(173, 255, 47, 0.5);
+  transform: translateY(-50%);
+}
+@media (min-width: 768px) {
+  /* on mobile the card is always to the right of the rail; on desktop
+     it flips depending on which side this row's card is on */
+  .pt-row--left .pt-node::before { left: auto; right: 100%; }
+  .pt-row--right .pt-node::before { left: 100%; }
 }
 
 /* ── Card ────────────────────────────────────────────────── */
 .pt-card {
   position: relative;
-  grid-column: 2;
+  margin: var(--pt-row-space) 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
   background: var(--pt-card);
   border: 1px solid var(--pt-border);
   border-radius: 16px;
@@ -123,26 +208,6 @@
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), 0 0 26px rgba(173, 255, 47, 0.08);
   transform: translateY(-6px);
 }
-@media (min-width: 768px) {
-  .pt-card--left { grid-column: 1; }
-  .pt-card--right { grid-column: 3; }
-}
-
-/* connector stub from card edge to the node */
-.pt-card::before {
-  content: "";
-  position: absolute;
-  top: 34px;
-  left: -20px;
-  width: 20px;
-  height: 1px;
-  background: rgba(173, 255, 47, 0.3);
-}
-@media (min-width: 768px) {
-  .pt-card--left::before { left: auto; right: -20px; }
-  .pt-card--right::before { left: -20px; }
-}
-
 .pt-card-onerow {
   display: flex;
   align-items: center;
