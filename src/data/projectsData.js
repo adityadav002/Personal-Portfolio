@@ -1,6 +1,7 @@
 const projects = [
   {
     name: "MovieDB",
+    number: "01",
     hoverimg:
       "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1170&auto=format&fit=crop",
     videoSrc:
@@ -24,15 +25,31 @@ React, Tailwind CSS, REST API (PokeAPI), Axios
   `,
     linkUrl: "https://pokedex-ykae.onrender.com/",
     sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
-     screenshots: [
-    "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
-  ],
+    screenshots: [
+      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
+    ],
+    problem: {
+      title: "PROBLEM",
+      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
+    },
+    impact: {
+      title: "IMPACT",
+      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
+    },
+    learned: [
+      "Building responsive UIs with React and Tailwind CSS",
+      "Fetching and managing real-time data using REST APIs",
+      "Handling search, filters, and dynamic UI updates",
+      "Implementing smooth animations and transitions",
+      "Optimizing performance and user experience"
+    ],
   },
   {
     name: "MovieDB",
+    number: "02",
     hoverimg:
       "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1170&auto=format&fit=crop",
     videoSrc:
@@ -56,15 +73,31 @@ React, Tailwind CSS, REST API (PokeAPI), Axios
   `,
     linkUrl: "https://pokedex-ykae.onrender.com/",
     sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
-     screenshots: [
-    "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
-  ],
+    screenshots: [
+      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
+    ],
+    problem: {
+      title: "PROBLEM",
+      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
+    },
+    impact: {
+      title: "IMPACT",
+      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
+    },
+    learned: [
+      "Building responsive UIs with React and Tailwind CSS",
+      "Fetching and managing real-time data using REST APIs",
+      "Handling search, filters, and dynamic UI updates",
+      "Implementing smooth animations and transitions",
+      "Optimizing performance and user experience"
+    ],
   },
   {
     name: "MovieDB",
+    number: "03",
     hoverimg:
       "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1170&auto=format&fit=crop",
     videoSrc:
@@ -88,15 +121,31 @@ React, Tailwind CSS, REST API (PokeAPI), Axios
   `,
     linkUrl: "https://pokedex-ykae.onrender.com/",
     sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
-     screenshots: [
-    "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
-  ],
+    screenshots: [
+      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
+    ],
+    problem: {
+      title: "PROBLEM",
+      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
+    },
+    impact: {
+      title: "IMPACT",
+      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
+    },
+    learned: [
+      "Building responsive UIs with React and Tailwind CSS",
+      "Fetching and managing real-time data using REST APIs",
+      "Handling search, filters, and dynamic UI updates",
+      "Implementing smooth animations and transitions",
+      "Optimizing performance and user experience"
+    ],
   },
   {
     name: "MovieDB",
+    number: "04",
     hoverimg:
       "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1170&auto=format&fit=crop",
     videoSrc:
@@ -120,15 +169,31 @@ React, Tailwind CSS, REST API (PokeAPI), Axios
   `,
     linkUrl: "https://pokedex-ykae.onrender.com/",
     sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
-     screenshots: [
-    "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
-  ],
+    screenshots: [
+      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
+    ],
+    problem: {
+      title: "PROBLEM",
+      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
+    },
+    impact: {
+      title: "IMPACT",
+      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
+    },
+    learned: [
+      "Building responsive UIs with React and Tailwind CSS",
+      "Fetching and managing real-time data using REST APIs",
+      "Handling search, filters, and dynamic UI updates",
+      "Implementing smooth animations and transitions",
+      "Optimizing performance and user experience"
+    ],
   },
   {
     name: "MovieDB",
+    number: "05",
     hoverimg:
       "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1170&auto=format&fit=crop",
     videoSrc:
@@ -152,15 +217,31 @@ React, Tailwind CSS, REST API (PokeAPI), Axios
   `,
     linkUrl: "https://pokedex-ykae.onrender.com/",
     sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
-     screenshots: [
-    "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
-  ],
+    screenshots: [
+      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
+    ],
+    problem: {
+      title: "PROBLEM",
+      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
+    },
+    impact: {
+      title: "IMPACT",
+      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
+    },
+    learned: [
+      "Building responsive UIs with React and Tailwind CSS",
+      "Fetching and managing real-time data using REST APIs",
+      "Handling search, filters, and dynamic UI updates",
+      "Implementing smooth animations and transitions",
+      "Optimizing performance and user experience"
+    ],
   },
   {
     name: "MovieDB",
+    number: "06",
     hoverimg:
       "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1170&auto=format&fit=crop",
     videoSrc:
@@ -184,12 +265,27 @@ React, Tailwind CSS, REST API (PokeAPI), Axios
   `,
     linkUrl: "https://pokedex-ykae.onrender.com/",
     sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
-     screenshots: [
-    "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
-  ],
+    screenshots: [
+      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
+    ],
+    problem: {
+      title: "PROBLEM",
+      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
+    },
+    impact: {
+      title: "IMPACT",
+      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
+    },
+    learned: [
+      "Building responsive UIs with React and Tailwind CSS",
+      "Fetching and managing real-time data using REST APIs",
+      "Handling search, filters, and dynamic UI updates",
+      "Implementing smooth animations and transitions",
+      "Optimizing performance and user experience"
+    ],
   },
 ];
 

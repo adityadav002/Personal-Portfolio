@@ -210,6 +210,11 @@ function Project() {
           screenshots={selectedProject.screenshots}
           sourceCodeUrl={selectedProject.sourceCodeUrl}
           tags={selectedProject.tags || []}
+          projectIndex={projects.indexOf(selectedProject)}
+          projectNumber={selectedProject.number}
+          problem={selectedProject.problem}
+          impact={selectedProject.impact}
+          learned={selectedProject.learned}
         />
       )}
 

@@ -14,9 +14,7 @@ export default function PortfolioHero() {
   const navLinks = ["About", "Skills", "Projects", "Contact"];
 
   return (
-    <div
-      className="relative bg-black overflow-hidden"
-    >
+    <div className="relative bg-black overflow-hidden">
       {/* Animated background gradient blobs */}
       <div
         className="absolute inset-0 overflow-hidden"
@@ -72,27 +70,34 @@ export default function PortfolioHero() {
       {/* Navigation */}
       <nav className="relative z-50 px-5 py-5">
         <div className="max-w-8xl mx-auto">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div className="group cursor-pointer">
-              <h2 className="text-2xl lg:text-3xl font-bold tracking-tight text-white relative">
-                <span className="relative z-10">PORTFOLIO</span>
-                <div className="absolute -inset-2 bg-lime-400 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500" />
+          <div className="hidden md:grid grid-cols-3 items-center">
+            {/* Left */}
+
+            <div>
+              <h2 className="text-2xl lg:text-3xl font-bold tracking-tight text-white">
+                PORTFOLIO
               </h2>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-12">
-              {navLinks.map((link, index) => (
+            {/* Center */}
+
+            <div className="flex justify-center items-center gap-10">
+              {navLinks.map((link) => (
                 <a
                   key={link}
                   href={`#${link.toLowerCase()}`}
                   className="relative text-white/60 hover:text-white font-medium text-sm tracking-wide transition-colors duration-300 group"
                 >
                   {link}
+
                   <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-lime-400 group-hover:w-full transition-all duration-300" />
                 </a>
               ))}
+            </div>
+
+            {/* Right */}
+
+            <div className="flex justify-end">
               <a
                 href="https://www.linkedin.com/in/aditya-yadav003/"
                 target="_blank"
@@ -103,11 +108,20 @@ export default function PortfolioHero() {
                 </button>
               </a>
             </div>
+          </div>
 
-            {/* Mobile Menu Button */}
+          {/* Mobile Layout */}
+
+          <div className="flex md:hidden items-center justify-between">
+            {/* Logo */}
+            <h2 className="text-2xl font-bold tracking-tight text-white">
+              PORTFOLIO
+            </h2>
+
+            {/* Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden text-white p-2 z-[60]"
+              className="text-white p-2 z-[60]"
               aria-label="Toggle menu"
             >
               <div className="w-6 h-5 flex flex-col justify-between">
@@ -116,11 +130,13 @@ export default function PortfolioHero() {
                     isMenuOpen ? "rotate-45 translate-y-2" : ""
                   }`}
                 />
+
                 <span
                   className={`w-full h-0.5 bg-white transition-all duration-300 ${
                     isMenuOpen ? "opacity-0" : ""
                   }`}
                 />
+
                 <span
                   className={`w-full h-0.5 bg-white transition-all duration-300 ${
                     isMenuOpen ? "-rotate-45 -translate-y-2" : ""
