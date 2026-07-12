@@ -1,0 +1,47 @@
+/*
+  Single source of truth for where each section sits in the modal grid.
+  LeftPanel/RightPanel don't know about columns — they just tag each
+  section with one of these classes. Changing the layout (including the
+  mobile reorder) only ever happens here.
+*/
+
+.content {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  column-gap: 64px;
+  height: 100%;
+  align-content: start;
+}
+
+/* ---- Desktop (default) ---- */
+.badge    { grid-column: 1; grid-row: 1; }
+.title    { grid-column: 1; grid-row: 2; }
+.pills    { grid-column: 1; grid-row: 3; }
+.desc     { grid-column: 1; grid-row: 4; }
+.actions  { grid-column: 1; grid-row: 5; }
+.cards    { grid-column: 1; grid-row: 6; }
+
+.showcase { grid-column: 2; grid-row: 1 / 6; align-self: start; }
+.learned  { grid-column: 2; grid-row: 6; align-self: start; }
+
+/* ---- Tablet: 45/55 becomes a gentler 58/42 split ---- */
+@media (max-width: 1180px) {
+  .content { grid-template-columns: 58% 42%; column-gap: 40px; }
+}
+
+/* ---- Mobile: single column, image first ---- */
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+  }
+
+  .showcase { grid-column: 1; grid-row: 1; align-self: auto; margin-bottom: 30px; }
+  .badge    { grid-column: 1; grid-row: 2; }
+  .title    { grid-column: 1; grid-row: 3; }
+  .pills    { grid-column: 1; grid-row: 4; }
+  .desc     { grid-column: 1; grid-row: 5; }
+  .actions  { grid-column: 1; grid-row: 6; }
+  .cards    { grid-column: 1; grid-row: 7; }
+  .learned  { grid-column: 1; grid-row: 8; align-self: auto; margin-top: 8px; }
+}

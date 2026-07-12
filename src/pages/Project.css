@@ -93,6 +93,12 @@
 .pt-row {
   --pt-gap: 20px;
   --pt-row-space: 22px;
+  /* Stagger delay, cycling every 4 rows (0/120/240/360ms) rather than
+     growing forever with index — a card ten rows down shouldn't sit
+     there waiting over a second after it's already on screen. Only
+     rows close together (the ones that can plausibly enter the
+     viewport in the same moment) need to feel offset from each other. */
+  --pt-delay: 0ms;
   position: relative;
   display: flex;
   align-items: stretch;
@@ -101,6 +107,9 @@
 @media (min-width: 768px) {
   .pt-row { --pt-gap: 28px; --pt-row-space: 34px; }
 }
+.pt-row:nth-child(4n+2) { --pt-delay: 120ms; }
+.pt-row:nth-child(4n+3) { --pt-delay: 240ms; }
+.pt-row:nth-child(4n)   { --pt-delay: 360ms; }
 
 /* .pt-card-slot is the actual flex-row item — deliberately bare (no
    padding/border/margin of its own) so its flex-basis:0 resolves to a
@@ -148,7 +157,10 @@
   opacity: 0.55;
 }
 
-/* Node — always exactly between the two equal rail segments */
+/* Node — always exactly between the two equal rail segments.
+   Entrance (opacity/scale/glow) is scoped inside @supports so browsers
+   without :has() support just show a normal, static, fully-visible
+   node instead of one stuck invisible forever. */
 .pt-node {
   position: relative;
   flex-shrink: 0;
@@ -166,7 +178,38 @@
   transform: scale(1.15);
 }
 
-/* Connector — anchored to the node, so it always meets its center */
+@supports selector(:has(a)) {
+  .pt-node {
+    opacity: 0;
+    transform: scale(0.5);
+    box-shadow: 0 0 0 rgba(173, 255, 47, 0);
+    transition:
+      opacity 0.7s cubic-bezier(.22, 1, .36, 1) var(--pt-delay),
+      transform 0.7s cubic-bezier(.22, 1, .36, 1) var(--pt-delay),
+      box-shadow 0.7s cubic-bezier(.22, 1, .36, 1) var(--pt-delay);
+    will-change: opacity, transform;
+  }
+  .pt-row:has(.pt-card--visible) .pt-node {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 12px rgba(173, 255, 47, 0.35);
+    /* once revealed, switch to fast/undelayed transitions so hover
+       (which also touches transform + box-shadow) feels instant */
+    transition:
+      opacity 0.7s cubic-bezier(.22, 1, .36, 1) var(--pt-delay),
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    will-change: auto;
+  }
+  .pt-row:hover .pt-node {
+    box-shadow: 0 0 20px rgba(173, 255, 47, 0.65);
+    transform: scale(1.15);
+  }
+}
+
+/* Connector — anchored to the node, so it always meets its center.
+   Grows outward from the node toward the card via scaleX, using a
+   transform-origin that sits exactly at the node's edge. */
 .pt-node::before {
   content: "";
   position: absolute;
@@ -176,12 +219,23 @@
   height: 1px;
   background: rgba(173, 255, 47, 0.5);
   transform: translateY(-50%);
+  transform-origin: left center;
 }
 @media (min-width: 768px) {
   /* on mobile the card is always to the right of the rail; on desktop
      it flips depending on which side this row's card is on */
-  .pt-row--left .pt-node::before { left: auto; right: 100%; }
-  .pt-row--right .pt-node::before { left: 100%; }
+  .pt-row--left .pt-node::before { left: auto; right: 100%; transform-origin: right center; }
+  .pt-row--right .pt-node::before { left: 100%; transform-origin: left center; }
+}
+
+@supports selector(:has(a)) {
+  .pt-node::before {
+    transform: translateY(-50%) scaleX(0);
+    transition: transform 0.7s cubic-bezier(.22, 1, .36, 1) var(--pt-delay);
+  }
+  .pt-row:has(.pt-card--visible) .pt-node::before {
+    transform: translateY(-50%) scaleX(1);
+  }
 }
 
 /* ── Card ────────────────────────────────────────────────── */
@@ -196,17 +250,38 @@
   padding: 22px 24px;
   cursor: pointer;
   z-index: 1;
+
+  /* Entrance start state: soft fade + rise + gentle scale + a light
+     blur that lifts as it settles into place. */
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transform: translateY(48px) scale(0.96);
+  filter: blur(6px);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity 0.8s cubic-bezier(.22, 1, .36, 1) var(--pt-delay),
+    transform 0.8s cubic-bezier(.22, 1, .36, 1) var(--pt-delay),
+    filter 0.8s cubic-bezier(.22, 1, .36, 1) var(--pt-delay);
 }
-.pt-card--visible { opacity: 1; transform: translateY(0); }
+.pt-card--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  will-change: auto;
+  /* Once revealed, hand transform/border-color/box-shadow off to
+     fast, undelayed transitions — hover shouldn't inherit the
+     scroll-reveal stagger delay. */
+  transition:
+    opacity 0.8s cubic-bezier(.22, 1, .36, 1) var(--pt-delay),
+    filter 0.8s cubic-bezier(.22, 1, .36, 1) var(--pt-delay),
+    transform 0.35s cubic-bezier(.22, 1, .36, 1),
+    border-color 0.4s cubic-bezier(.22, 1, .36, 1),
+    box-shadow 0.4s cubic-bezier(.22, 1, .36, 1),
+    background-color 0.3s ease;
+}
 .pt-card:hover {
   border-color: rgba(173, 255, 47, 0.4);
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), 0 0 26px rgba(173, 255, 47, 0.08);
-  transform: translateY(-6px);
+  transform: translateY(-4px) scale(1.01);
 }
 .pt-card-onerow {
   display: flex;
@@ -378,9 +453,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pt-card, .pt-node, .pt-arrow, .pt-more-btn, .pt-ext-link {
+  .pt-card, .pt-node, .pt-node::before, .pt-arrow, .pt-more-btn, .pt-ext-link {
     transition: none !important;
     animation: none !important;
   }
-  .pt-card { opacity: 1; transform: none; }
+  .pt-card { opacity: 1; transform: none; filter: none; }
+  .pt-node { opacity: 1; transform: none; box-shadow: 0 0 12px rgba(173, 255, 47, 0.35); }
+  .pt-node::before { transform: translateY(-50%) scaleX(1); }
 }

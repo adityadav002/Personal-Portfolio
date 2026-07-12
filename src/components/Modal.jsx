@@ -8,6 +8,7 @@ import {
   FiPlay,
 } from "react-icons/fi";
 import { parseProjectDesc } from "../utils/parseProjectDesc.js";
+import "./LayoutModule.css";
 
 /* ─── CSS ──────────────────────────────────────────────────────── */
 const STYLES = `
