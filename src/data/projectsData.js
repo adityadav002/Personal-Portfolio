@@ -7,48 +7,65 @@ const projects = [
     videoSrc:
       "https://cdn.dribbble.com/userupload/25383613/file/large-7573762a9916c35515e07edf77dda214.mp4",
     posterSrc:
-      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    desc:`
-A fully responsive Pokedex web application built using React and modern web technologies. 
-It allows users to explore Pokémon with detailed information such as abilities, stats, types, and evolutions.
+      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8MHx8fA%3D%3D",
+
+    desc: `
+A full-stack Movie Discovery and Recommendation platform built using the MERN stack and Machine Learning. 
+It allows users to discover movies, search by title or actor, receive personalized recommendations, and manage their own movie collections.
 
 Key Features:
-• Search Pokémon by name or ID
-• Filter by type (Fire, Water, Grass, etc.)
-• Detailed stats visualization (HP, Attack, Defense)
-• Smooth UI animations and transitions
-• Responsive design for mobile and desktop
-• API integration with real-time data fetching
+• JWT Authentication with secure login and registration
+• Search movies by title, actor, or keyword
+• AI-powered movie recommendation system using Machine Learning
+• Create and manage personal Watchlist and Favorites
+• Detailed movie pages with ratings, genres, cast, trailers, and overview
+• User profile with personalized movie collections
+• Responsive Netflix-inspired UI for desktop and mobile
+• Real-time movie data powered by TMDB API
 
 Tech Stack:
-React, Tailwind CSS, REST API (PokeAPI), Axios
+React, Node.js, Express.js, MongoDB, Python, Scikit-learn, TMDB API, JWT, Axios
   `,
-    linkUrl: "https://pokedex-ykae.onrender.com/",
-    sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
+
+    linkUrl: "https://moviedb-sf9j.onrender.com/home",
+    sourceCodeUrl: "https://github.com/adityadav002/MovieDB",
+
     screenshots: [
-      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
+      "/images/moviedb/hero-banner.png",
+      "/images/moviedb/home-page.png",
+      "/images/moviedb/movie-grid.png",
+      "/images/moviedb/movie-details.png",
+      "/images/moviedb/recommendations.png",
+      "/images/moviedb/watchlist.png",
+      "/images/moviedb/favorites.png",
+      "/images/moviedb/profile.png",
     ],
+
     problem: {
       title: "PROBLEM",
-      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
+      description:
+        "Movie enthusiasts often switch between multiple platforms to search movies, discover recommendations, save favorites, and manage watchlists. Existing solutions rarely combine personalized recommendations with a clean, responsive user experience.",
     },
+
     impact: {
       title: "IMPACT",
-      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
+      description:
+        "MovieDB delivers a centralized platform where users can discover movies, receive intelligent recommendations, organize personal collections, and enjoy a seamless experience across desktop and mobile devices.",
     },
+
     learned: [
-      "Building responsive UIs with React and Tailwind CSS",
-      "Fetching and managing real-time data using REST APIs",
-      "Handling search, filters, and dynamic UI updates",
-      "Implementing smooth animations and transitions",
-      "Optimizing performance and user experience"
+      "Developing scalable full-stack applications using the MERN stack",
+      "Building a Machine Learning recommendation engine with Python and Scikit-learn",
+      "Implementing secure JWT authentication and protected routes",
+      "Integrating third-party APIs (TMDB) for real-time movie data",
+      "Managing complex application state and asynchronous API requests",
+      "Designing responsive, modern user interfaces with React",
+      "Optimizing backend performance and database queries",
+      "Deploying and maintaining production-ready full-stack applications",
     ],
   },
   {
-    name: "MovieDB",
+    name: "Creduce",
     number: "02",
     hoverimg:
       "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1170&auto=format&fit=crop",
@@ -56,47 +73,65 @@ React, Tailwind CSS, REST API (PokeAPI), Axios
       "https://cdn.dribbble.com/userupload/25383613/file/large-7573762a9916c35515e07edf77dda214.mp4",
     posterSrc:
       "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    desc:`
-A fully responsive Pokedex web application built using React and modern web technologies. 
-It allows users to explore Pokémon with detailed information such as abilities, stats, types, and evolutions.
+
+    desc: `
+Creduce is a full-stack expense management platform that helps users track income, expenses, budgets, and financial insights in one place. It provides interactive analytics, secure authentication, multiple account management, and AI-powered spending predictions for smarter financial decisions.
 
 Key Features:
-• Search Pokémon by name or ID
-• Filter by type (Fire, Water, Grass, etc.)
-• Detailed stats visualization (HP, Attack, Defense)
-• Smooth UI animations and transitions
-• Responsive design for mobile and desktop
-• API integration with real-time data fetching
+• Secure JWT Authentication and user accounts
+• Add, edit, and manage income & expenses
+• Multiple account support (Cash, Bank, Wallet, etc.)
+• Categories and custom subcategories
+• Interactive dashboards and spending analytics
+• Monthly trends and financial reports
+• Machine Learning-based expense prediction
+• Responsive UI optimized for desktop and mobile
 
 Tech Stack:
-React, Tailwind CSS, REST API (PokeAPI), Axios
+React, Flask, Python, MySQL, Pandas, Scikit-learn, Chart.js, JWT, Bootstrap
   `,
-    linkUrl: "https://pokedex-ykae.onrender.com/",
-    sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
+
+    linkUrl: "https://creduce.onrender.com/",
+    sourceCodeUrl: "https://github.com/adityadav002/Creduce",
+
     screenshots: [
-      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
+      "/images/creduce/dashboard.png",
+      "/images/creduce/add-expense.png",
+      "/images/creduce/transaction-history.png",
+      "/images/creduce/monthly-transactions.png",
+      "/images/creduce/category-analysis.png",
+      "/images/creduce/compare-months.png",
+      "/images/creduce/filter-transactions.png",
+      "/images/creduce/download-report.png",
+      "/images/creduce/calculator.png",
+      "/images/creduce/user-profile.png",
     ],
+
     problem: {
       title: "PROBLEM",
-      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
+      description:
+        "Many expense tracking applications only provide basic transaction recording without meaningful insights, flexible account management, or intelligent financial analysis. Users often need multiple tools to understand and manage their finances effectively.",
     },
+
     impact: {
       title: "IMPACT",
-      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
+      description:
+        "Creduce centralizes personal finance management by combining expense tracking, budgeting, visual analytics, and machine learning predictions into a single responsive platform, helping users make informed financial decisions.",
     },
+
     learned: [
-      "Building responsive UIs with React and Tailwind CSS",
-      "Fetching and managing real-time data using REST APIs",
-      "Handling search, filters, and dynamic UI updates",
-      "Implementing smooth animations and transitions",
-      "Optimizing performance and user experience"
+      "Building scalable full-stack applications with Flask and React",
+      "Designing relational databases using MySQL",
+      "Implementing JWT authentication and secure user sessions",
+      "Creating interactive dashboards and data visualizations",
+      "Building Machine Learning models with Scikit-learn",
+      "Data preprocessing and financial data analysis using Pandas",
+      "Managing complex CRUD operations and database relationships",
+      "Deploying production-ready web applications",
     ],
   },
   {
-    name: "MovieDB",
+    name: "AlgoLab",
     number: "03",
     hoverimg:
       "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1170&auto=format&fit=crop",
@@ -104,189 +139,122 @@ React, Tailwind CSS, REST API (PokeAPI), Axios
       "https://cdn.dribbble.com/userupload/25383613/file/large-7573762a9916c35515e07edf77dda214.mp4",
     posterSrc:
       "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    desc:`
-A fully responsive Pokedex web application built using React and modern web technologies. 
-It allows users to explore Pokémon with detailed information such as abilities, stats, types, and evolutions.
+
+    desc: `
+AlgoLab is a modern online coding platform designed for learning, practicing, and experimenting with programming languages. It features a VS Code-like editor powered by Monaco Editor, secure Docker-based code execution, multiple language support, and a curated programming resource hub.
 
 Key Features:
-• Search Pokémon by name or ID
-• Filter by type (Fire, Water, Grass, etc.)
-• Detailed stats visualization (HP, Attack, Defense)
-• Smooth UI animations and transitions
-• Responsive design for mobile and desktop
-• API integration with real-time data fetching
+• Monaco Editor with VS Code-like experience
+• Secure code execution using isolated Docker containers
+• Support for C, C++, Java, Python, JavaScript, and more
+• Real-time code compilation and execution
+• Interactive programming resource guide
+• Responsive and modern developer-focused UI
+• Multiple compiler environments in one platform
+• Fast and scalable architecture
 
 Tech Stack:
-React, Tailwind CSS, REST API (PokeAPI), Axios
+React, Node.js, Express.js, Monaco Editor, Docker, JavaScript, REST API
   `,
-    linkUrl: "https://pokedex-ykae.onrender.com/",
-    sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
+
+    linkUrl: "https://github.com/adityadav002/AlgoLab-CodeEditor",
+    sourceCodeUrl: "https://github.com/adityadav002/AlgoLab-CodeEditor",
+
     screenshots: [
-      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
+      "/images/algolab/HomePage.png",
+      "/images/algolab/frontendCompiler.png",
+      "/images/algolab/cppCompiler.png",
+      "/images/algolab/allCompiler.png",
+      "/images/algolab/resouceGuide.png",
     ],
+
     problem: {
       title: "PROBLEM",
-      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
+      description:
+        "Most online code editors either support limited programming languages, lack an IDE-like experience, or execute code without proper isolation, making them less suitable for learning and experimentation.",
     },
+
     impact: {
       title: "IMPACT",
-      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
+      description:
+        "AlgoLab provides a secure, responsive, and feature-rich coding environment where developers and students can write, compile, execute, and learn programming using multiple languages within a single platform.",
     },
+
     learned: [
-      "Building responsive UIs with React and Tailwind CSS",
-      "Fetching and managing real-time data using REST APIs",
-      "Handling search, filters, and dynamic UI updates",
-      "Implementing smooth animations and transitions",
-      "Optimizing performance and user experience"
+      "Building a VS Code-like editor using Monaco Editor",
+      "Running user code securely inside Docker containers",
+      "Managing backend APIs for code compilation and execution",
+      "Supporting multiple programming languages in one application",
+      "Designing scalable full-stack React applications",
+      "Handling asynchronous execution and compiler responses",
+      "Optimizing developer experience with responsive UI design",
+      "Deploying containerized full-stack applications",
     ],
   },
   {
-    name: "MovieDB",
+    name: "DataScope",
     number: "04",
-    hoverimg:
-      "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1170&auto=format&fit=crop",
+
     videoSrc:
       "https://cdn.dribbble.com/userupload/25383613/file/large-7573762a9916c35515e07edf77dda214.mp4",
+
     posterSrc:
-      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    desc:`
-A fully responsive Pokedex web application built using React and modern web technologies. 
-It allows users to explore Pokémon with detailed information such as abilities, stats, types, and evolutions.
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
 
-Key Features:
-• Search Pokémon by name or ID
-• Filter by type (Fire, Water, Grass, etc.)
-• Detailed stats visualization (HP, Attack, Defense)
-• Smooth UI animations and transitions
-• Responsive design for mobile and desktop
-• API integration with real-time data fetching
+    desc: `
+      DataScope is an end-to-end AutoML platform that transforms raw CSV datasets into production-ready machine learning models through an intelligent, guided workflow. It automates data preprocessing, exploratory analysis, feature engineering, algorithm recommendation, model training, evaluation, explainability, and model export—all without requiring users to write code.
 
-Tech Stack:
-React, Tailwind CSS, REST API (PokeAPI), Axios
+      Key Features:
+      • Intelligent dataset analysis and automatic problem type detection
+      • Advanced data cleaning and preprocessing pipeline
+      • Missing value, duplicate, outlier, and data quality handling
+      • Automatic feature engineering and encoding
+      • ML algorithm recommendation based on dataset characteristics
+      • Interactive model training with configurable hyperparameters
+      • Multi-model comparison and leaderboard
+      • Feature importance and model explainability
+      • Export trained models and preprocessing pipeline
+      • Modern dashboard with real-time training logs and progress tracking
+
+      Tech Stack:
+      Python, Flask, Scikit-learn, XGBoost, Pandas, NumPy, Plotly, HTML, CSS, JavaScript, Bootstrap
   `,
-    linkUrl: "https://pokedex-ykae.onrender.com/",
-    sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
+
+    linkUrl: "https://github.com/adityadav002/CSV-Analyzer-And-ML-Model-Predicition",
+    sourceCodeUrl: "https://github.com/adityadav002/CSV-Analyzer-And-ML-Model-Predicition",
+
     screenshots: [
-      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
+      "/images/dataScope/loadDataset.png",
+      "/images/dataScope/modelRecommendation.png",
+      "/images/dataScope/Traning.png",
+      "/images/dataScope/traningResult.png",
+      "/images/dataScope/Feature.png",
+      "/images/dataScope/Dashboard.png",
     ],
+
     problem: {
       title: "PROBLEM",
-      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
+      description:
+        "Building machine learning models typically requires extensive knowledge of data preprocessing, feature engineering, algorithm selection, hyperparameter tuning, and evaluation. Beginners often struggle with converting raw datasets into production-ready ML pipelines.",
     },
+
     impact: {
       title: "IMPACT",
-      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
+      description:
+        "DataScope simplifies the complete machine learning workflow by automatically cleaning datasets, recommending suitable algorithms, training multiple models, comparing their performance, explaining predictions, and exporting deployable ML packages through an intuitive no-code interface.",
     },
+
     learned: [
-      "Building responsive UIs with React and Tailwind CSS",
-      "Fetching and managing real-time data using REST APIs",
-      "Handling search, filters, and dynamic UI updates",
-      "Implementing smooth animations and transitions",
-      "Optimizing performance and user experience"
+      "Designing a complete end-to-end AutoML workflow",
+      "Building advanced data preprocessing and cleaning pipelines",
+      "Implementing automatic machine learning problem detection",
+      "Training and evaluating multiple ML algorithms simultaneously",
+      "Developing model recommendation systems based on dataset characteristics",
+      "Generating feature importance and model explainability reports",
+      "Managing asynchronous ML training with real-time progress tracking",
+      "Exporting production-ready machine learning models and preprocessing pipelines",
     ],
-  },
-  {
-    name: "MovieDB",
-    number: "05",
-    hoverimg:
-      "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1170&auto=format&fit=crop",
-    videoSrc:
-      "https://cdn.dribbble.com/userupload/25383613/file/large-7573762a9916c35515e07edf77dda214.mp4",
-    posterSrc:
-      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    desc:`
-A fully responsive Pokedex web application built using React and modern web technologies. 
-It allows users to explore Pokémon with detailed information such as abilities, stats, types, and evolutions.
-
-Key Features:
-• Search Pokémon by name or ID
-• Filter by type (Fire, Water, Grass, etc.)
-• Detailed stats visualization (HP, Attack, Defense)
-• Smooth UI animations and transitions
-• Responsive design for mobile and desktop
-• API integration with real-time data fetching
-
-Tech Stack:
-React, Tailwind CSS, REST API (PokeAPI), Axios
-  `,
-    linkUrl: "https://pokedex-ykae.onrender.com/",
-    sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
-    screenshots: [
-      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
-    ],
-    problem: {
-      title: "PROBLEM",
-      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
-    },
-    impact: {
-      title: "IMPACT",
-      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
-    },
-    learned: [
-      "Building responsive UIs with React and Tailwind CSS",
-      "Fetching and managing real-time data using REST APIs",
-      "Handling search, filters, and dynamic UI updates",
-      "Implementing smooth animations and transitions",
-      "Optimizing performance and user experience"
-    ],
-  },
-  {
-    name: "MovieDB",
-    number: "06",
-    hoverimg:
-      "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1170&auto=format&fit=crop",
-    videoSrc:
-      "https://cdn.dribbble.com/userupload/25383613/file/large-7573762a9916c35515e07edf77dda214.mp4",
-    posterSrc:
-      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    desc:`
-A fully responsive Pokedex web application built using React and modern web technologies. 
-It allows users to explore Pokémon with detailed information such as abilities, stats, types, and evolutions.
-
-Key Features:
-• Search Pokémon by name or ID
-• Filter by type (Fire, Water, Grass, etc.)
-• Detailed stats visualization (HP, Attack, Defense)
-• Smooth UI animations and transitions
-• Responsive design for mobile and desktop
-• API integration with real-time data fetching
-
-Tech Stack:
-React, Tailwind CSS, REST API (PokeAPI), Axios
-  `,
-    linkUrl: "https://pokedex-ykae.onrender.com/",
-    sourceCodeUrl: "https://github.com/adityadav002/PokeDex",
-    screenshots: [
-      "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1580128637393-9f6d1b3cb03b?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1170&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?q=80&w=1170&auto=format&fit=crop"
-    ],
-    problem: {
-      title: "PROBLEM",
-      description: "Finding detailed Pokémon information was often scattered across multiple sources that weren't mobile-friendly or visually engaging."
-    },
-    impact: {
-      title: "IMPACT",
-      description: "Users can explore Pokémon data in a fast, intuitive, and visually appealing interface on any device."
-    },
-    learned: [
-      "Building responsive UIs with React and Tailwind CSS",
-      "Fetching and managing real-time data using REST APIs",
-      "Handling search, filters, and dynamic UI updates",
-      "Implementing smooth animations and transitions",
-      "Optimizing performance and user experience"
-    ],
-  },
+  }
 ];
 
 export default projects;
