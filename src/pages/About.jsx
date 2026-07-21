@@ -25,8 +25,8 @@ const About = () => {
 
   const downloadCV = () => {
     const link = document.createElement("a");
-    link.href = "/ADITYA-YADAV-1.pdf";
-    link.download = "Aditya_Yadav_CV.pdf";
+    link.href = "/ADITYA_YADAV_RESUME.pdf";
+    link.download = "ADITYA_YADAV_RESUME.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
