@@ -254,6 +254,81 @@ React, Node.js, Express.js, Monaco Editor, Docker, JavaScript, REST API
       "Managing asynchronous ML training with real-time progress tracking",
       "Exporting production-ready machine learning models and preprocessing pipelines",
     ],
+  },
+  {
+    name: "YouTube Video Analyzer",
+    number: "05",
+
+    // Use your dashboard screenshot as the project preview/poster.
+    // Keep videoSrc empty until you have an actual project demo video.
+    videoSrc: "",
+    posterSrc: "/images/ytanalyzer/dashboard.png",
+
+    desc: `
+    YouTube Video Analyzer is a full-stack platform for discovering, analyzing, organizing, and downloading YouTube content through a centralized dashboard.
+
+    It integrates the YouTube Data API and yt-dlp to collect detailed video and channel metadata, classify content into normal videos, Shorts, and live streams, and persist the analyzed data for later exploration.
+
+    Key Features:
+    • Search and analyze YouTube videos and channels
+    • Extract detailed video metadata and statistics
+    • Analyze channel information and uploaded content
+    • Intelligent crawling of channel uploads
+    • Separate classification of Videos, Shorts, and Live Streams
+    • Paginated video and channel data management
+    • Background job tracking for long-running crawl operations
+    • Detailed video analysis and metadata views
+    • YouTube video downloading with yt-dlp and FFmpeg
+    • Persistent database storage for analyzed content
+    • Dashboard with platform-wide analytics and statistics
+    • Authentication and protected user-specific functionality
+    • Download history and job management
+    • Responsive React-based interface
+
+    Tech Stack:
+    React, Vite, Flask, Python, MySQL, YouTube Data API, yt-dlp, FFmpeg, Axios
+  `,
+
+    linkUrl: "https://youtube-analyzer-backend-zi3w.onrender.com",
+    sourceCodeUrl: "https://github.com/adityadav002/YouTube-Video-Analyzer",
+
+    screenshots: [
+      "/images/ytanalyzer/dashboard.png",
+      "/images/ytanalyzer/search.png",
+      "/images/ytanalyzer/channels.png",
+      "/images/ytanalyzer/channels_details.png",
+      "/images/ytanalyzer/videos.png",
+      "/images/ytanalyzer/video_details.png",
+      "/images/ytanalyzer/jobs.png",
+      "/images/ytanalyzer/download.png",
+      "/images/ytanalyzer/settings.png",
+    ],
+
+    problem: {
+      title: "PROBLEM",
+      description:
+        "Analyzing YouTube content at scale often requires switching between multiple tools for searching videos, inspecting channel data, collecting metadata, monitoring statistics, and downloading content. Manual collection is time-consuming and makes it difficult to organize and analyze large amounts of YouTube data efficiently.",
+    },
+
+    impact: {
+      title: "IMPACT",
+      description:
+        "YouTube Video Analyzer provides a centralized platform for discovering and analyzing YouTube content. It automates metadata extraction and channel crawling, separates videos into normal videos, Shorts, and live streams, stores results for later analysis, and provides dedicated dashboards, job tracking, detailed views, and downloading capabilities.",
+    },
+
+    learned: [
+      "Building a production-oriented full-stack application using React, Flask, Python, and MySQL",
+      "Integrating the YouTube Data API for structured video and channel metadata",
+      "Using yt-dlp for reliable YouTube metadata extraction and video downloading",
+      "Designing a channel crawler using the YouTube uploads playlist workflow",
+      "Classifying YouTube content into videos, Shorts, and live streams",
+      "Managing long-running crawling and download operations through background jobs",
+      "Designing database schemas for persistent video, channel, job, and download data",
+      "Implementing pagination, filtering, duplicate handling, and data persistence",
+      "Building responsive dashboards for large-scale media data",
+      "Integrating FFmpeg for media processing and download workflows",
+      "Deploying a Flask and React application with a cloud-hosted MySQL database",
+    ],
   }
 ];
 
