@@ -289,8 +289,8 @@ React, Node.js, Express.js, Monaco Editor, Docker, JavaScript, REST API
     React, Vite, Flask, Python, MySQL, YouTube Data API, yt-dlp, FFmpeg, Axios
   `,
 
-    linkUrl: "https://youtube-analyzer-backend-zi3w.onrender.com",
-    sourceCodeUrl: "https://github.com/adityadav002/YouTube-Video-Analyzer",
+    linkUrl: "https://github.com/adityadav002/Youtube-Analyzer",
+    sourceCodeUrl: "https://github.com/adityadav002/Youtube-Analyzer",
 
     screenshots: [
       "/images/ytanalyzer/dashboard.png",
