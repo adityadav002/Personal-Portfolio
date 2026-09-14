@@ -219,7 +219,7 @@ function Project() {
       )}
 
       {/* More projects */}
-      <div className="pt-more"> 
+      <div className="pt-more">
         <a
           href="https://github.com/adityadav002"
           target="_blank"

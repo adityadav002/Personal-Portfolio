@@ -329,6 +329,73 @@ React, Node.js, Express.js, Monaco Editor, Docker, JavaScript, REST API
       "Integrating FFmpeg for media processing and download workflows",
       "Deploying a Flask and React application with a cloud-hosted MySQL database",
     ],
+  },
+  {
+    name: "DayFlow",
+    number: "06",
+
+    videoSrc: "",
+    posterSrc: "/images/dayflow/dashboard.png",
+
+    desc: `
+    DayFlow is a comprehensive productivity and project management platform designed to help individuals and teams organize tasks, schedule events, and collaborate seamlessly. It centralizes task management, calendars, messaging, and project analytics into a single unified workspace.
+
+    Key Features:
+    • Intuitive dashboard and personal "My Day" planning
+    • Comprehensive project management with Kanban boards
+    • Built-in calendar for event scheduling and reminders
+    • Real-time messaging and team communication
+    • Detailed project overviews, member management, and meeting scheduling
+    • Visual project analytics and progress tracking
+    • Secure user authentication with personalized profiles
+    • Responsive and modern user interface
+
+    Tech Stack:
+    React, Node.js, Express.js, MongoDB, JWT, REST API
+  `,
+
+    linkUrl: "https://dayflow-xyj9.onrender.com",
+    sourceCodeUrl: "https://github.com/adityadav002/DayFlow",
+
+    screenshots: [
+      "/images/dayflow/dashboard.png",
+      "/images/dayflow/myday.png",
+      "/images/dayflow/boards.png",
+      "/images/dayflow/project_kanban.png",
+      "/images/dayflow/project_overview.png",
+      "/images/dayflow/project_analytics.png",
+      "/images/dayflow/project_member.png",
+      "/images/dayflow/project_meeting.png",
+      "/images/dayflow/calender.png",
+      "/images/dayflow/event.png",
+      "/images/dayflow/message.png",
+      "/images/dayflow/reminder.png",
+      "/images/dayflow/profile.png",
+      "/images/dayflow/login.png",
+      "/images/dayflow/signup.png"
+    ],
+
+    problem: {
+      title: "PROBLEM",
+      description:
+        "Professionals and teams often struggle to manage their workflows efficiently because their tasks, meetings, calendars, and communications are scattered across multiple disconnected applications.",
+    },
+
+    impact: {
+      title: "IMPACT",
+      description:
+        "DayFlow centralizes the entire workflow by combining project boards, personal daily planning, team messaging, and event scheduling into one application, significantly improving productivity and organization.",
+    },
+
+    learned: [
+      "Building a scalable full-stack application with a complex UI",
+      "Implementing project management features like Kanban boards",
+      "Designing database schemas for users, projects, tasks, and messages",
+      "Managing state for calendars, events, and reminders",
+      "Developing responsive messaging interfaces",
+      "Creating interactive dashboards and analytics views",
+      "Implementing secure user authentication and profiles",
+    ],
   }
 ];
 
